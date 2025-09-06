@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NY Unique Contracting - Final Version</title>
+  <meta name="description" content="Expert masonry, concrete, and brickwork in Brooklyn with a modern, refined presentation. Licensed & insured. Get a free estimate." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root {
+      /* Palette & Design Tokens */
+      --bg-primary: #1a1a1a; /* Dark Charcoal */
+      --bg-secondary: #2d2d2d; /* Darker Gray */
+      --text-primary: #f0f0f0; /* Light Gray */
+      --text-secondary: #b0b0b0; /* Medium Gray */
+      --border-primary: #444444; /* Charcoal Gray */
+      --accent-primary: #c44536; /* Industrial Red */
+      --font-sans: "Inter", system-ui, sans-serif; 
+      --font-heading-weight: 800; 
+      --font-body-weight: 400;
+      --space-1: 0.5rem; --space-2: 1rem; --space-3: 1.5rem; --space-4: 2rem;
+      --space-5: 3.5rem; --space-6: 5rem; --space-7: 7rem; --space-8: 9rem;
+      --container-width: 1320px;
+      --container-padding: 2rem; 
+      --scroll-progress-horizontal: 0%;
+      --scroll-progress-vertical: 0%;
+      --sharp-radius: 4px; --soft-radius: 8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: var(--font-sans); background-color: var(--bg-primary); color: var(--text-secondary); line-height: 1.6; font-size: 16px; -webkit-font-smoothing: antialiased; }
+    img, svg { display: block; max-width: 100%; height: auto; }
+    .container { width: 100%; max-width: var(--container-width); padding-inline: var(--container-padding); margin-inline: auto; }
+    .content-section { padding-block: var(--space-7); }
+    .section-heading { text-align: center; max-width: 1000px; margin: 0 auto var(--space-5) auto; }
+    .section-heading h2 { font-family: var(--font-sans); font-weight: var(--font-heading-weight); font-size: clamp(2.2rem, 4vw, 2.8rem); line-height: 1.2; color: var(--text-primary); margin-bottom: var(--space-3); }
+    .visually-hidden { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
+
+    /* --- Header --- */
+    .header-container { position: sticky; top: 0; z-index: 1000; width: 100%; background-color: var(--bg-primary); transition: background-color 0.3s ease-in-out; }
+    .header-container.scrolled { background-color: rgba(26, 26, 26, 0.95); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-primary); }
+    .sticky-header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem var(--container-padding); max-width: var(--container-width); margin: 0 auto; }
+    .header-logo { font-weight: 700; font-size: 1.2rem; text-decoration: none; letter-spacing: 0.5px; color: var(--text-primary); }
+    .header-logo sup { font-size: 0.6em; top: -0.8em; margin-left: 2px; }
+    .header-nav { display: flex; align-items: center; gap: 2.5rem; flex-grow: 1; justify-content: flex-end; padding-right: 2.5rem; }
+    .header-nav a { font-size: 0.95rem; text-decoration: none; font-weight: 500; transition: color 0.2s ease-in-out, transform 0.2s ease-in-out; color: var(--text-secondary); }
+    .header-nav a:not(.header-cta):hover { color: var(--accent-primary); transform: translateY(-1px); }
+    .header-cta { padding: 0.7rem 1.5rem; border-radius: var(--sharp-radius); text-decoration: none; font-weight: 700; border: 2px solid var(--accent-primary); transition: all 0.2s ease-in-out; background-color: var(--accent-primary); color: var(--text-primary) !important; border-color: var(--accent-primary); }
+    .header-cta:hover { background-color: transparent; color: var(--text-primary) !important; }
+    .header-controls { display: flex; align-items: center; }
+    .lang-toggle a { text-decoration: none; transition: color .3s ease; padding: 0.25rem; font-size: 0.95rem; text-transform: uppercase; color: var(--text-secondary); }
+    .lang-toggle a.active { font-weight: 700; color: var(--text-primary); }
+    .lang-toggle a:hover { color: var(--accent-primary); }
+    .header-mobile-cta { display: none; background-color: var(--accent-primary); color: var(--text-primary) !important; padding: 0.5rem 1rem; border-radius: var(--sharp-radius); text-decoration: none; font-weight: 700; font-size: 0.85rem; margin-left: var(--space-2); transition: all 0.2s ease; }
+    .header-mobile-cta:hover { background-color: #a03025; transform: translateY(-1px); }
+    .header-progress-bar { position: absolute; bottom: -1px; left: 0; height: 3px; background-color: var(--accent-primary); width: var(--scroll-progress-horizontal); transition: width 0.1s ease-out; }
+
+    /* --- REFINED Hero Section --- */
+    .hero-section {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      padding-top: var(--space-5);
+      padding-bottom: var(--space-6);
+    }
+    .hero-content { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-5); align-items: center; }
+    .hero-main { grid-column: 1 / 8; padding-left: var(--space-4); border-left: 4px solid var(--accent-primary); }
+    .hero-image-wrapper { grid-column: 8 / 13; border-radius: var(--soft-radius); overflow: hidden; }
+    .hero-main .hero-tagline { font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: var(--space-3); }
+    .hero-main h1 { font-family: var(--font-sans); font-weight: var(--font-heading-weight); font-size: clamp(3.5rem, 6vw, 5rem); line-height: 1.05; color: var(--text-primary); margin: 0 0 1.5rem 0; }
+    .hero-main .hero-intro-p { font-size: 1.1rem; line-height: 1.8; max-width: 650px; color: var(--text-secondary); margin: 0 0 2.5rem 0; }
+    
+    .hero-cta-btn { display: inline-block; background: var(--accent-primary); color: var(--text-primary); border: 2px solid var(--accent-primary); padding: 1.2rem 2.5rem; border-radius: var(--sharp-radius); font-size: 1.1rem; font-weight: 700; text-decoration: none; transition: all .2s ease; margin-bottom: var(--space-3); }
+    .hero-cta-btn:hover { background: #a03025; border-color: #a03025; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+    
+    .hero-phone-link { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: var(--space-4); }
+    .hero-phone-link a { color: var(--accent-primary); text-decoration: none; font-weight: 600; }
+    .hero-phone-link a:hover { text-decoration: underline; }
+
+    /* ===== NEW: Hero Trust Badge Styles ===== */
+    .hero-trust-badges { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+    .hero-trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      padding: 0.6rem 1rem;
+      border-radius: var(--sharp-radius);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .hero-trust-badge i {
+      color: var(--text-primary);
+      font-size: 0.9rem;
+    }
+
+    /* --- Showcase Carousel Section --- */
+    .showcase-reel-section { padding-block: var(--space-4); position: relative; }
+    .showcase-reel-container {
+      width: 100%;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+      padding-block: 10px;
+      margin-block: -10px;
+    }
+    .showcase-reel-track { display: flex; list-style: none; padding: 0; margin: 0; }
+    .reel-slide {
+      flex-shrink: 0;
+      width: calc(100% / 3);
+      padding: 0 var(--space-2);
+    }
+    .reel-item { position: relative; display: block; border-radius: var(--soft-radius); overflow: hidden; cursor: pointer; }
+    .reel-item img { width: 100%; aspect-ratio: 16/9; object-fit: cover; transition: transform 0.4s ease; }
+    .reel-item:hover img { transform: scale(1.05); }
+    .reel-item-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: var(--space-4) var(--space-3) var(--space-2); color: var(--text-primary); opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease, transform 0.3s ease; }
+    .reel-item:hover .reel-item-overlay { opacity: 1; transform: translateY(0); }
+    .reel-item-overlay h3 { font-size: 1rem; font-weight: 600; margin: 0 0 0.25rem 0; }
+    .reel-item-overlay p { font-size: 0.85rem; color: var(--text-secondary); margin: 0; }
+    .reel-nav { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(26, 26, 26, 0.8); border: 1px solid var(--border-primary); color: var(--text-primary); width: 50px; height: 50px; border-radius: 50%; cursor: pointer; transition: all 0.2s ease; }
+    .reel-nav:hover { background-color: var(--accent-primary); border-color: var(--accent-primary); }
+    .reel-nav.prev { left: var(--space-4); }
+    .reel-nav.next { right: var(--space-4); }
+
+    /* --- Reputation & Testimonials Section --- */
+    #reputation .featured-testimonial { text-align: center; margin-bottom: var(--space-7); max-width: 1000px; margin-inline: auto; }
+    #reputation .featured-testimonial blockquote { margin: 0 auto; font-family: var(--font-sans); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.3; color: var(--text-primary); font-weight: var(--font-heading-weight); max-width: 900px; }
+    #reputation .featured-testimonial footer { margin-top: var(--space-3); font-size: 1.1rem; font-weight: 500; color: var(--text-secondary); }
+    #reputation .reputation-badges-band { display: flex; align-items: center; justify-content: center; gap: var(--space-4); text-align: center; margin-bottom: var(--space-6); }
+    #reputation .badges-label { font-size: 0.9rem; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+    #reputation .badges-container { display: flex; align-items: center; gap: var(--space-3); }
+    #reputation .reputation-badge { display: flex; align-items: center; gap: var(--space-1); text-decoration: none; padding: 0.5rem 1rem; border-radius: var(--sharp-radius); background-color: var(--bg-secondary); border: 2px solid var(--border-primary); transition: all 0.2s ease; }
+    #reputation .reputation-badge:hover { transform: translateY(-2px); box-shadow: 0 2px 8px rgba(0,0,0,0.2); border-color: var(--accent-primary); }
+    
+    #reputation .reputation-badge img {
+      width: 20px;
+      height: 20px;
+      transition: all 0.2s ease;
+    }
+    #reputation .reputation-badge:hover img { filter: none; }
+    #reputation .badge-rating { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
+    .secondary-testimonials-carousel { position: relative; }
+    .testimonial-track-container { overflow: hidden; padding-block: var(--space-2); margin-block: calc(-1 * var(--space-2)); }
+    .testimonial-track { display: flex; list-style: none; padding: 0; margin: 0; transition: transform 0.5s ease-in-out; }
+    .testimonial-slide { flex-shrink: 0; width: calc(100% / 3); padding: 0 var(--space-2); }
+    .testimonial-card { display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: var(--space-4); background-color: var(--bg-secondary); border: 2px solid var(--border-primary); border-radius: var(--soft-radius); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+    .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: var(--accent-primary); }
+    .testimonial-card blockquote { margin: 0 0 var(--space-3) 0; font-size: 1.1rem; color: var(--text-primary); }
+    .testimonial-card footer { font-weight: 600; color: var(--text-secondary); }
+    .testimonial-controls { display: flex; justify-content: center; align-items: center; gap: var(--space-3); margin-top: var(--space-4); }
+    .testimonial-nav { background: none; border: 1px solid var(--border-primary); color: var(--text-primary); width: 44px; height: 44px; border-radius: var(--sharp-radius); cursor: pointer; transition: all 0.2s ease; }
+    .testimonial-nav:hover:not(:disabled) { background-color: var(--accent-primary); border-color: var(--accent-primary); }
+    .testimonial-nav:disabled { opacity: 0.5; cursor: not-allowed; }
+    .testimonial-dots { display: flex; gap: var(--space-1); }
+    .testimonial-dot { width: 10px; height: 10px; border-radius: 50%; background-color: var(--border-primary); border: none; padding: 0; cursor: pointer; transition: background-color 0.2s ease; }
+    .testimonial-dot.active { background-color: var(--text-primary); }
+
+    /* --- Team Section --- */
+    #team .section-heading p { max-width: 750px; margin-inline: auto; color: var(--text-secondary); }
+    .team-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+    .team-card { text-align: center; background-color: var(--bg-secondary); padding: var(--space-4); border-radius: var(--soft-radius); border: 1px solid var(--border-primary); transition: all 0.3s ease; }
+    .team-card:hover { transform: translateY(-5px); border-color: var(--accent-primary); box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+    .team-image-wrapper { aspect-ratio: 1/1; border-radius: var(--soft-radius); overflow: hidden; margin-bottom: var(--space-4); position: relative; }
+    .team-image-wrapper img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.4s ease, transform 0.4s ease; }
+    .team-card:hover .team-image-wrapper img { filter: grayscale(0%); transform: scale(1.05); }
+    .team-info h3 { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); margin: 0 0 var(--space-1) 0; }
+    .team-info h4 { font-size: 1rem; font-weight: 500; color: var(--accent-primary); margin: 0 0 var(--space-2) 0; }
+    .team-info .divider { width: 40px; height: 1px; background-color: var(--border-primary); margin: 0 auto var(--space-2) auto; }
+    .team-info p { font-size: 0.95rem; color: var(--text-secondary); max-width: 350px; margin-inline: auto; }
+
+    /* --- Mid-Page CTA Section --- */
+    .cta-break { background-color: var(--bg-secondary); padding-block: var(--space-6); text-align: center; }
+    .cta-break h2 { font-size: clamp(2rem, 4vw, 2.5rem); font-weight: var(--font-heading-weight); color: var(--text-primary); max-width: 600px; margin: 0 auto var(--space-4) auto; line-height: 1.3; }
+    .cta-break .cta-btn { 
+      display: inline-block;
+      background: var(--accent-primary);
+      border: 2px solid var(--accent-primary);
+      color: var(--text-primary);
+      padding: 1rem 2rem;
+      border-radius: var(--sharp-radius);
+      font-weight: 700;
+      text-decoration: none;
+      transition: all .2s ease;
+      font-size: 1.1rem;
+    }
+    .cta-break .cta-btn:hover { background: #a03025; border-color: #a03025; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+
+    /* --- Process Section --- */
+    .process-container-grid { display: grid; grid-template-columns: 1fr 2.5fr 1fr; align-items: center; gap: var(--space-5); }
+    .process-flank-image { height: 100%; background-size: cover; background-position: center; filter: grayscale(100%); opacity: 0.7; border-radius: var(--soft-radius); }
+    .process-list { display: flex; flex-direction: column; gap: var(--space-4); position: relative; }
+    .process-list::before { content: ''; position: absolute; left: 39px; top: 40px; bottom: 40px; width: 2px; background: repeating-linear-gradient(var(--border-primary) 0, var(--border-primary) 5px, transparent 5px, transparent 10px); z-index: 1; }
+    .process-step { display: grid; grid-template-columns: 80px 1fr; gap: var(--space-4); align-items: flex-start; position: relative; z-index: 2; }
+    .process-step .icon { font-size: 1.8rem; color: var(--accent-primary); width: 80px; height: 80px; display: grid; place-content: center; background-color: var(--bg-secondary); border: 1px solid var(--border-primary); border-radius: 20%; flex-shrink: 0; }
+    .process-step .text-content { max-width: 650px; }
+    .process-step .text-content h3 { font-family: var(--font-sans); font-weight: 700; font-size: 1.2rem; color: var(--text-primary); margin: 0 0 var(--space-1) 0; }
+    .process-step .text-content p { margin: 0; }
+    
+    /* --- Section Divider --- */
+    .section-divider { width: 80px; height: 2px; background-color: var(--accent-primary); margin: var(--space-7) auto 0; }
+
+    /* --- Showcase Section --- */
+    .showcase-section { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--space-5); align-items: flex-start; }
+    .showcase-menu { grid-column: 1 / 4; position: sticky; top: 120px; align-self: start; }
+    .showcase-menu ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-1); }
+    .showcase-menu a { display: block; padding: var(--space-2) var(--space-3); text-decoration: none; font-weight: 600; font-size: 0.95rem; color: var(--text-secondary); border-radius: var(--soft-radius); transition: all 0.2s ease-in-out; }
+    .showcase-menu a:hover { color: var(--text-primary); background-color: var(--bg-secondary); }
+    .showcase-menu a.active { color: var(--text-primary); background-color: var(--accent-primary); }
+    .showcase-gallery { grid-column: 4 / 13; }
+    .gallery-category { margin-bottom: var(--space-6); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-4); }
+    .gallery-item { border-radius: var(--soft-radius); overflow: hidden; cursor: pointer; background-color: var(--bg-secondary); transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; border: 2px solid transparent; position: relative; }
+    .gallery-item:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-color: var(--accent-primary); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-item-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); padding: var(--space-4) var(--space-3) var(--space-2); color: var(--text-primary); opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease, transform 0.3s ease; }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; transform: translateY(0); }
+    .gallery-item-overlay h3 { font-size: 1rem; font-weight: 600; margin: 0 0 0.25rem 0; }
+    .gallery-item-overlay p { font-size: 0.85rem; color: var(--text-secondary); margin: 0; }
+    
+    /* --- FAQ Section --- */
+    .faq-accordion { max-width: 1000px; margin: 0 auto; }
+    .faq-accordion details { border-bottom: 1px solid var(--border-primary); }
+    .faq-accordion summary { font-size: 1.1rem; font-weight: 600; color: var(--text-primary); padding: var(--space-3) var(--space-2); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; transition: color 0.2s ease; }
+    .faq-accordion summary::-webkit-details-marker { display: none; }
+    .faq-accordion summary::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; transition: transform 0.3s ease; font-size: 0.9rem; }
+    .faq-accordion details[open] summary { color: var(--accent-primary); }
+    .faq-accordion details[open] summary::after { transform: rotate(180deg); }
+    .faq-content { padding: 0 var(--space-2) var(--space-3) var(--space-2); }
+
+    /* --- Footer / Contact Section --- */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: var(--space-5); margin-bottom: var(--space-7); }
+    .info-block .detail { display: flex; align-items: flex-start; gap: var(--space-3); margin-bottom: var(--space-4); }
+    .info-block .icon { width: 44px; height: 44px; display: grid; place-content: center; border-radius: 20%; background-color: var(--bg-secondary); color: var(--text-primary); margin-top: .2rem; font-size: 1rem; flex-shrink: 0; }
+    .info-block h3 { font-weight: 700; font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; margin: 0 0 .5rem 0; color: var(--text-primary); }
+    .info-block .detail p { font-size: 1.05rem; color: var(--text-secondary); margin: 0; line-height: 1.5; }
+    .info-block .detail a { color: var(--accent-primary); text-decoration: none; transition: text-decoration 0.2s ease; }
+    .info-block .detail a:hover { text-decoration: underline; }
+    .form-card { background: var(--bg-secondary); padding: var(--space-5); border-radius: var(--soft-radius); }
+    .form .form-group { margin-bottom: var(--space-3); }
+    .form-group-hidden { display: none !important; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); }
+    .input, .select { width: 100%; border: 1px solid var(--border-primary); background-color: var(--bg-primary); color: var(--text-primary); border-radius: var(--soft-radius); padding: 0.8rem 1rem; outline: none; font-size: .95rem; transition: all .2s ease; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+    .select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23b0b0b0'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1.2em; padding-right: 3rem; }
+    .input:focus, .select:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(196, 69, 54, 0.4); }
+    .form-group:focus-within label { color: var(--accent-primary); }
+    textarea.input { min-height: 120px; resize: vertical; }
+    .btn-submit { background: var(--accent-primary); color: var(--text-primary); border: 2px solid var(--accent-primary); padding: 0.9rem 1.8rem; border-radius: var(--sharp-radius); font-weight: 600; cursor: pointer; transition: all .2s ease; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .btn-submit:hover:not(:disabled) { background: #a03025; border-color: #a03025; }
+    .btn-submit .fa-arrow-right { transition: transform 0.2s ease-in-out; }
+    .btn-submit:hover:not(:disabled) .fa-arrow-right { transform: translateX(4px); }
+    .btn-submit.sent { background: #4CAF50; border-color: #4CAF50; color: white; }
+    .main-footer { padding-bottom: var(--space-5); text-align: center; }
+    .footer-socials { display: flex; justify-content: center; gap: var(--space-4); margin-bottom: var(--space-3); }
+    .footer-socials a { color: var(--text-secondary); text-decoration: none; font-size: 1.5rem; transition: color 0.3s ease, transform 0.3s ease; }
+    .footer-socials a:hover { color: var(--accent-primary); transform: scale(1.1); }
+    .footer-lic-numbers, .footer-copyright { color: var(--text-secondary); font-size: 0.9rem; }
+    .form-helper { display: block; font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem; font-style: italic; }
+
+    /* --- Utilities --- */
+    .lightbox { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.9); animation: fadeIn 0.3s ease; }
+    .lightbox.active { display: block; }
+    .lightbox-content { position: relative; margin: auto; padding: 20px; width: 90%; max-width: 1000px; height: 90%; display: flex; align-items: center; justify-content: center; }
+    .lightbox-content img { max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 4px; }
+    .close-lightbox { position: absolute; top: 15px; right: 35px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 2001; }
+    .fade-in-on-scroll { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; } .fade-in-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .gallery-item.fade-in-on-scroll { transition-delay: var(--delay, 0s); }
+
+    /* --- NEW: Mobile Scroll Indicator --- */
+    .mobile-scroll-indicator { display: none; position: fixed; top: 0; left: 0; width: 4px; height: var(--scroll-progress-vertical); background-color: var(--accent-primary); z-index: 3000; transition: height 0.1s ease-out; }
+
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 1023px) {
+      .header-nav { display: none; }
+      .header-mobile-cta { display: inline-block; }
+      .hero-content { grid-template-columns: 1fr; }
+      .hero-main { grid-column: 1 / -1; padding-left:0; border-left:none; text-align: center;}
+      .hero-image-wrapper { display: none; }
+      .reel-slide { width: 50%; }
+      .team-grid { grid-template-columns: 1fr; }
+      .testimonial-slide { width: 50%; }
+      .process-container-grid { grid-template-columns: 1fr; }
+      .process-flank-image { display: none; }
+      .showcase-section { grid-template-columns: 1fr; }
+      .showcase-menu { position: static; grid-column: 1 / -1; }
+      .showcase-menu ul { flex-direction: row; overflow-x: auto; padding-bottom: 1rem; }
+      .showcase-menu li { flex-shrink: 0; }
+      .showcase-gallery { grid-column: 1 / -1; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .hero-trust-badges { justify-content: center; } /* Center badges on tablet */
+    }
+    @media (max-width: 767px) {
+      .mobile-scroll-indicator { display: block; }
+      .reel-slide { width: 90%; }
+      .showcase-reel-container { -webkit-mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%); mask-image: linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%); }
+      .reel-nav { width: 40px; height: 40px; } .reel-nav.prev { left: var(--space-2); } .reel-nav.next { right: var(--space-2); }
+      .testimonial-slide, .gallery-grid, .form-row { width: 100%; grid-template-columns: 1fr; }
+      .process-step { grid-template-columns: 1fr; text-align: center; }
+      .process-step .icon { margin: 0 auto var(--space-3); }
+      .process-list::before { left: 50%; transform: translateX(-50%); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-scroll-indicator" id="mobileScrollIndicator"></div>
+
+  <header class="header-container on-dark" id="mainHeader">
+    <div class="sticky-header">
+      <a href="#" class="header-logo">NY UNIQUE CONTRACTING<sup>®</sup></a>
+      <nav class="header-nav">
+        <a href="#reputation">Who We Are</a>
+        <a href="#services">Our Work</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact-new" class="header-cta" aria-label="Get a Free Estimate">Get a Free Estimate</a>
+      </nav>
+      <div class="header-controls">
+        <div class="lang-toggle"><a href="#" class="active">EN</a><a href="#">ES</a></div>
+        <a href="#contact-new" class="header-mobile-cta" aria-label="Get a Free Estimate">Get a Free Estimate</a>
+      </div>
+    </div>
+    <div class="header-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+  </header>
+
+  <main>
+    <section class="hero-section" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-main">
+                    <p class="hero-tagline">Personal attention. Professional results.</p>
+                    <h1>Your neighbors in quality contracting.</h1>
+                    <p class="hero-intro-p">My name is Mr. Tee and I’m the owner of New York Unique Contracting. For over 20 years, my sons and I have proudly served our Brooklyn community. Our business is built on three guiding principles: total satisfaction, high-quality results, and open communication.</p>
+                    
+                    <a href="#contact-new" class="hero-cta-btn" aria-label="Get a Free Estimate">Get a Free Estimate</a>
+                    <p class="hero-phone-link">Prefer to talk now? <a href="tel:+17183383413" aria-label="Call NY Unique Contracting">Call (718) 338-3413</a></p>
+                    
+                    <!-- ===== NEW Hero Trust Badge Component ===== -->
+                    <div class="hero-trust-badges">
+                        <span class="hero-trust-badge"><i class="fa-solid fa-shield-halved"></i> Licensed & Insured</span>
+                        <span class="hero-trust-badge"><i class="fa-solid fa-calendar-check"></i> Serving Brooklyn 20+ Years</span>
+                    </div>
+
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="https://i.pinimg.com/736x/be/3c/e1/be3ce14a724e01a06af707ee50079f86.jpg" alt="A skilled mason from NY Unique Contracting carefully laying bricks on a wall." width="500" height="400">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="showcase-reel" class="showcase-reel-section">
+        <div class="showcase-reel-container">
+            <ul class="showcase-reel-track"></ul>
+        </div>
+        <button class="reel-nav prev" aria-label="Previous slide">&#10094;</button>
+        <button class="reel-nav next" aria-label="Next slide">&#10095;</button>
+    </section>
+    
+    <section id="reputation" class="content-section">
+      <div class="container">
+        <div class="featured-testimonial fade-in-on-scroll">
+            <blockquote>"The attention to detail was exceptional. Our new patio is not only beautiful but built to last. The entire process was seamless and professional from start to finish."</blockquote>
+            <footer>— Sarah L., Park Slope</footer>
+        </div>
+        <div class="reputation-badges-band fade-in-on-scroll">
+          <span class="badges-label">Trusted on</span>
+          <div class="badges-container">
+            <a href="https://www.yelp.com/biz/new-york-unique-contracting-brooklyn-2" target="_blank" rel="noopener noreferrer" class="reputation-badge" aria-label="Read our Yelp reviews">
+              <img src="yelp-logo.png" alt="Yelp">
+              <span class="badge-rating">5★</span>
+            </a>
+            <a href="https://www.google.com/maps/place/New+York+Unique+Contracting" target="_blank" rel="noopener noreferrer" class="reputation-badge" aria-label="Read our Google reviews">
+               <img src="google-logo.png" alt="Google">
+              <span class="badge-rating">4.7★</span>
+            </a>
+            <a href="https://www.angi.com" target="_blank" rel="noopener noreferrer" class="reputation-badge" aria-label="Read our Angi reviews">
+              <img src="angi-logo.png" alt="Angi">
+              <span class="badge-rating">4.6★</span>
+            </a>
+          </div>
+        </div>
+        <div class="secondary-testimonials-carousel fade-in-on-scroll">
+            <div class="testimonial-track-container">
+                <ul class="testimonial-track"></ul>
+            </div>
+            <div class="testimonial-controls">
+                <button class="testimonial-nav prev" aria-label="Previous slide">&#10094;</button>
+                <div class="testimonial-dots"></div>
+                <button class="testimonial-nav next" aria-label="Next slide">&#10095;</button>
+            </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="content-section team-section">
+        <div class="container">
+            <div class="section-heading fade-in-on-scroll">
+                <h2>The Family Behind the Work</h2>
+                <p>NY Unique Contracting is more than a business—it's a family legacy. Led by Mr. Tee and his son Danny, our team is built on a foundation of mutual respect, shared expertise, and an unwavering commitment to our clients and community.</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card fade-in-on-scroll">
+                    <div class="team-image-wrapper">
+                        <img src="https://i.pinimg.com/736x/a0/73/4d/a0734d038f7854ea6cbfa5c529980f67.jpg" alt="Portrait of Mr. Tee" width="300" height="300">
+                    </div>
+                    <div class="team-info">
+                        <h3>Mr. Tee</h3>
+                        <h4>Owner & Founder</h4>
+                        <div class="divider"></div>
+                        <p>With over two decades of hands-on experience, Mr. Tee ensures every project meets his exacting standards for quality and integrity.</p>
+                    </div>
+                </div>
+                <div class="team-card fade-in-on-scroll">
+                    <div class="team-image-wrapper">
+                        <img src="https://i.pinimg.com/736x/27/a1/e7/27a1e7ae1a996faa0b3efa1b267e0ebc.jpg" alt="Portrait of Danny" width="300" height="300">
+                    </div>
+                    <div class="team-info">
+                        <h3>Danny</h3>
+                        <h4>Lead Mason & Project Manager</h4>
+                        <div class="divider"></div>
+                        <p>Danny combines traditional techniques with modern efficiency, managing on-site operations and client communication with precision.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-break fade-in-on-scroll" id="mid-cta">
+        <div class="container">
+            <h2>Ready to Build Something Lasting?</h2>
+            <a href="#contact-new" class="cta-btn" aria-label="Get a Free Estimate">Get a Free Estimate</a>
+        </div>
+    </section>
+
+    <section id="process" class="content-section">
+        <div class="container">
+            <div class="section-heading fade-in-on-scroll"><h2>Our Process</h2></div>
+            <div class="process-container-grid">
+                <div class="process-flank-image" style="background-image: url('https://i.pinimg.com/736x/94/bc/34/94bc3419df616b0edf7da2a524344a02.jpg');"></div>
+                <div class="process-list">
+                    <div class="process-step fade-in-on-scroll"><div class="icon"><i class="fa-solid fa-comments"></i></div><div class="text-content"><h3>1. Consultation</h3><p>We start with a detailed discussion to understand your vision and provide a free, transparent estimate.</p></div></div>
+                    <div class="process-step fade-in-on-scroll"><div class="icon"><i class="fa-solid fa-drafting-compass"></i></div><div class="text-content"><h3>2. Planning</h3><p>Once approved, we create a clear project plan and schedule that respects your time and property.</p></div></div>
+                    <div class="process-step fade-in-on-scroll"><div class="icon"><i class="fa-solid fa-trowel-bricks"></i></div><div class="text-content"><h3>3. Execution</h3><p>Our skilled team gets to work, focusing on quality, safety, and maintaining a clean job site. We treat every detail with the utmost precision, ensuring the final result is built to last.</p></div></div>
+                    <div class="process-step fade-in-on-scroll"><div class="icon"><i class="fa-solid fa-check-double"></i></div><div class="text-content"><h3>4. Walkthrough</h3><p>We conclude with a final inspection to guarantee your complete satisfaction with the finished work.</p></div></div>
+                </div>
+                <div class="process-flank-image" style="background-image: url('https://i.pinimg.com/1200x/f0/22/67/f02267b394b1be3349e28bb911abde56.jpg');"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <section id="services" class="content-section container">
+      <div class="section-heading"><h2 class="fade-in-on-scroll">Our Work</h2><p class="fade-in-on-scroll">A portfolio of our commitment to quality craftsmanship. Select a category to navigate our work, or scroll to explore.</p></div>
+      <div class="showcase-section">
+          <aside class="showcase-menu fade-in-on-scroll">
+            <ul>
+                <li><a href="#masonry-gallery" class="active">Masonry & Brickwork</a></li>
+                <li><a href="#concrete-gallery">Concrete</a></li>
+                <li><a href="#cleanup-gallery">Clean-Up & Finishing</a></li>
+                <li><a href="#pavers-gallery">Patios & Pavers</a></li>
+            </ul>
+          </aside>
+          <div class="showcase-gallery">
+            <div id="masonry-gallery" class="gallery-category">
+                <div class="gallery-grid">
+                    <div class="gallery-item fade-in-on-scroll" style="--delay: 0s;"><img src="masonry/1.png" alt="Masonry project 1" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Facade Restoration</h3><p>Cobble Hill, 2024</p></div></div>
+                    <div class="gallery-item fade-in-on-scroll" style="--delay: 0.1s;"><img src="masonry/2.jpg" alt="Masonry project 2" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Brick Repointing</h3><p>Brooklyn Heights, 2024</p></div></div>
+                    <div class="gallery-item fade-in-on-scroll" style="--delay: 0.2s;"><img src="masonry/3.jpg" alt="Masonry project 3" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Stoop Rebuilding</h3><p>Park Slope, 2023</p></div></div>
+                    <div class="gallery-item fade-in-on-scroll" style="--delay: 0s;"><img src="masonry/4.jpg" alt="Masonry project 4" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Custom Brickwork</h3><p>Williamsburg, 2023</p></div></div>
+                    <div class="gallery-item fade-in-on-scroll" style="--delay: 0.1s;"><img src="masonry/5.jpg" alt="Masonry project 5" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Chimney Repair</h3><p>Bay Ridge, 2023</p></div></div>
+                    <div class="gallery-item fade-in-on-scroll" style="--delay: 0.2s;"><img src="masonry/6.jpg" alt="Masonry project 6" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Retaining Wall</h3><p>Bensonhurst, 2022</p></div></div>
+                </div>
+            </div>
+            <div id="concrete-gallery" class="gallery-category">
+                <div class="gallery-grid">
+                    <div class="gallery-item fade-in-on-scroll"><img src="concrete/1.jpg" alt="Concrete project 1" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Driveway Pouring</h3><p>Marine Park, 2024</p></div></div>
+                    <div class="gallery-item fade-in-on-scroll"><img src="concrete/2.jpg" alt="Concrete project 2" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Sidewalk Repair</h3><p>Sheepshead Bay, 2023</p></div></div>
+                    <div class="gallery-item fade-in-on-scroll"><img src="concrete/3.jpg" alt="Concrete project 3" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Concrete Steps</h3><p>Dyker Heights, 2023</p></div></div>
+                    <div class="gallery-item fade-in-on-scroll"><img src="concrete/4.jpg" alt="Concrete project 4" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Foundation Work</h3><p>Coney Island, 2022</p></div></div>
+                </div>
+            </div>
+            <div id="cleanup-gallery" class="gallery-category">
+                <div class="gallery-grid">
+                    <div class="gallery-item fade-in-on-scroll"><img src="clean-up/1.jpg" alt="Clean-up project 1" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Post-Project Cleanup</h3><p>Brooklyn, 2024</p></div></div>
+                    <div class="gallery-item fade-in-on-scroll"><img src="clean-up/2.jpg" alt="Clean-up project 2" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Site Finishing</h3><p>Brooklyn, 2024</p></div></div>
+                </div>
+            </div>
+            <div id="pavers-gallery" class="gallery-category">
+                <div class="gallery-grid">
+                    <div class="gallery-item fade-in-on-scroll"><img src="patio/1.jpg" alt="Patio project 1" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Bluestone Patio</h3><p>Carroll Gardens, 2024</p></div></div>
+                    <div class="gallery-item fade-in-on-scroll"><img src="patio/2.jpg" alt="Patio project 2" loading="lazy" decoding="async"><div class="gallery-item-overlay"><h3>Paver Walkway</h3><p>Windsor Terrace, 2023</p></div></div>
+                </div>
+            </div>
+          </div>
+      </div>
+    </section>
+    
+    <div class="section-divider"></div>
+
+    <section id="faq" class="content-section">
+        <div class="container">
+            <div class="section-heading fade-in-on-scroll"><h2>Frequently Asked Questions</h2></div>
+            <div class="faq-accordion fade-in-on-scroll">
+                <details><summary>How does the estimation process work?</summary><div class="faq-content"><p>It starts with a simple phone call or by filling out our contact form. We'll schedule a time to visit your property, discuss your vision, take measurements, and assess the site. Within a few days, we'll provide a detailed, transparent estimate with a full breakdown of costs. There's no cost or obligation for this initial consultation.</p></div></details>
+                <details><summary>How long will my project take?</summary><div class="faq-content"><p>Project timelines vary depending on the scope and complexity. A simple sidewalk repair might take a few days, while a full patio and retaining wall project could take several weeks. Once we finalize the project plan, we will provide you with a clear schedule and keep you updated on our progress every step of the way.</p></div></details>
+                <details><summary>What types of payment do you accept?</summary><div class="faq-content"><p>We accept checks, all major credit cards, and bank transfers. We'll discuss a payment schedule that works for you, which typically involves a deposit to secure materials and scheduling, with subsequent payments made at key project milestones.</p></div></details>
+                <details><summary>Are you licensed and insured?</summary><div class="faq-content"><p>Absolutely. We are fully licensed by the NYC Department of Consumer Affairs (LIC #1192706 & LIC #1192710) and carry comprehensive liability insurance. We believe in protecting our clients, our team, and your property, and we're happy to provide proof of our credentials upon request.</p></div></details>
+                <details><summary>What areas do you service?</summary><div class="faq-content"><p>We are based in and proudly serve the entire borough of Brooklyn. Depending on the project scope, we may also take on projects in surrounding areas. The best way to find out is to contact us with your project details and location.</p></div></details>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-new" class="footer-plinth">
+      <div class="container">
+          <div class="section-heading fade-in-on-scroll"><h2>Get in Touch</h2><p>Have a project in mind? Fill out the form below and we’ll get back to you within one business day.</p></div>
+          <div class="contact-grid fade-in-on-scroll">
+              <div class="info-block">
+                  <div class="detail"><div class="icon"><i class="fa-solid fa-phone"></i></div><div><h3>Call Us</h3><p><a href="tel:+17183383413">(718) 338-3413</a></p></div></div>
+                  <div class="detail"><div class="icon"><i class="fa-solid fa-location-dot"></i></div><div><h3>Location</h3><p>7802 21st Ave Apt C3<br/>Brooklyn, NY 11214</p></div></div>
+                  <div class="detail"><div class="icon"><i class="fa-regular fa-clock"></i></div><div><h3>Hours</h3><p>Mon–Fri: 7AM – 7PM<br>Sat: 9AM – 5PM<br>Sun: Closed</p></div></div>
+              </div>
+              <div class="form-card">
+                   <form class="form" id="quoteForm">
+                      <div class="form-row">
+                          <div class="form-group"><label for="form-purpose">I would like to:</label><select class="select" id="form-purpose" name="purpose"><option value="quote">Request a Quote</option><option value="feedback">Give Feedback</option></select></div>
+                          <div id="conditional-group-wrapper">
+                              <div id="service-group" class="form-group"><label for="service-type">Service of Interest</label><select id="service-type" name="service_type" class="select"><option>Masonry & Brickwork</option><option>Concrete & Cement</option><option>Patios & Pavers</option><option>Site Clean-Up & Finishing</option><option>Other</option></select></div>
+                              <div id="feedback-group" class="form-group form-group-hidden"><label for="feedback-type">Feedback Type</label><select id="feedback-type" name="feedback_type" class="select"><option>A General Comment</option><option>A Compliment for the Team</option><option>A Suggestion for Improvement</option></select></div>
+                          </div>
+                      </div>
+                      <div class="form-group"><label for="name">Full Name</p><input class="input" id="name" name="name" type="text" required /></div>
+                      <div class="form-row"><div class="form-group"><label for="phone">Phone</label><input class="input" id="phone" name="phone" type="tel" required /></div><div class="form-group"><label for="email">Email</label><input class="input" id="email" name="email" type="email" /><small class="form-helper">Email optional</small></div></div>
+                      <div class="form-group"><label for="message" id="message-label">Project Details</label><textarea class="input" id="message" name="message" placeholder="Tell us about your project…"></textarea></div>
+                      <button class="btn-submit" type="submit" id="submitBtn">Submit Request <i class="fa-solid fa-arrow-right"></i></button>
+                  </form>
+              </div>
+          </div>
+      </div>
+      <footer class="main-footer">
+          <div class="container">
+            <div class="footer-socials"><a href="#" aria-label="Yelp"><i class="fa-brands fa-yelp"></i></a><a href="#" aria-label="Google"><i class="fa-brands fa-google"></i></a></div>
+            <div class="footer-lic-numbers"><p>LIC #1192706 &nbsp; | &nbsp; LIC #1192710</p></div>
+            <div class="footer-copyright"><p>© 2025 NY Unique Contracting</p></div>
+          </div>
+      </footer>
+    </section>
+  </main>
+  
+  <div id="lightbox-container"></div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const header = document.getElementById('mainHeader');
+      const progressBar = document.querySelector('.header-progress-bar');
+      const mobileIndicator = document.getElementById('mobileScrollIndicator');
+
+      const handleScroll = () => {
+        const scrollY = window.scrollY;
+        const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = totalHeight > 0 ? (scrollY / totalHeight) * 100 : 0;
+        
+        document.documentElement.style.setProperty('--scroll-progress-horizontal', `${progress}%`);
+        document.documentElement.style.setProperty('--scroll-progress-vertical', `${progress}%`);
+
+        if (progressBar) progressBar.setAttribute('aria-valuenow', Math.round(progress));
+        header.classList.toggle('scrolled', scrollY > 50);
+      };
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+
+      // --- INFINITE SHOWCASE CAROUSEL SCRIPT ---
+      const showcaseReelData = [
+          { src: 'https://i.pinimg.com/736x/be/3c/e1/be3ce14a724e01a06af707ee50079f86.jpg', title: 'Facade Restoration', location: 'Cobble Hill' },
+          { src: 'https://i.pinimg.com/736x/94/bc/34/94bc3419df616b0edf7da2a524344a02.jpg', title: 'Bluestone Patio', location: 'Carroll Gardens' },
+          { src: 'https://i.pinimg.com/1200x/f0/22/67/f02267b394b1be3349e28bb911abde56.jpg', title: 'Concrete Steps', location: 'Dyker Heights' },
+          { src: 'https://i.pinimg.com/1200x/6c/66/d1/6c66d14192c00115f24f47c01eb8481b.jpg', title: 'Stoop Rebuilding', location: 'Park Slope' },
+          { src: 'https://i.pinimg.com/736x/27/a1/e7/27a1e7ae1a996faa0b3efa1b267e0ebc.jpg', title: 'Paver Walkway', location: 'Windsor Terrace' },
+          { src: 'https://i.pinimg.com/736x/a0/73/4d/a0734d038f7854ea6cbfa5c529980f67.jpg', title: 'Chimney Repair', location: 'Bay Ridge' }
+      ];
+      const reelContainer = document.getElementById('showcase-reel');
+      if (reelContainer) {
+          const track = reelContainer.querySelector('.showcase-reel-track');
+          let isTransitioning = false;
+          let slideWidth = 0;
+          
+          showcaseReelData.forEach(item => {
+              const slide = document.createElement('li');
+              slide.className = 'reel-slide';
+              slide.innerHTML = `<div class="reel-item gallery-item"><img src="${item.src}" alt="${item.title} in ${item.location}"><div class="reel-item-overlay"><h3>${item.title}</h3><p>${item.location}</p></div></div>`;
+              track.appendChild(slide);
+          });
+
+          const slides = Array.from(track.children);
+          const clonesCount = slides.length > 0 ? slides.length : 1;
+          
+          slides.slice().reverse().forEach(slide => track.prepend(slide.cloneNode(true)));
+          slides.slice().forEach(slide => track.appendChild(slide.cloneNode(true)));
+          
+          let currentIndex = clonesCount;
+
+          const updateSlideWidthAndPosition = () => {
+              slideWidth = track.children[0] ? track.children[0].getBoundingClientRect().width : 0;
+              track.style.transition = 'none';
+              track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+          };
+          
+          const moveTo = (index) => {
+              if (isTransitioning) return;
+              isTransitioning = true;
+              track.style.transition = 'transform 0.5s ease-in-out';
+              currentIndex = index;
+              track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+          };
+          
+          const nextButton = reelContainer.querySelector('.reel-nav.next');
+          const prevButton = reelContainer.querySelector('.reel-nav.prev');
+
+          nextButton.addEventListener('click', () => moveTo(currentIndex + 1));
+          prevButton.addEventListener('click', () => moveTo(currentIndex - 1));
+          
+          track.addEventListener('transitionend', () => {
+              isTransitioning = false;
+              if (currentIndex >= clonesCount * 2) {
+                  currentIndex = clonesCount;
+                  updateSlideWidthAndPosition();
+              }
+              if (currentIndex <= 0) {
+                  currentIndex = clonesCount;
+                  updateSlideWidthAndPosition();
+              }
+          });
+          window.addEventListener('resize', updateSlideWidthAndPosition);
+          setTimeout(updateSlideWidthAndPosition, 100);
+      }
+
+      const testimonialsData = [
+        { quote: "Their crew was punctual, clean, and incredibly skilled. A truly professional operation.", author: "Mark D.", neighborhood: "Brooklyn Heights" },
+        { quote: "Honest, fair pricing and the quality of work exceeded our expectations. We couldn't be happier with our new walkway.", author: "Emily R.", neighborhood: "Williamsburg" },
+        { quote: "They restored our brownstone facade beautifully, preserving the historical character while ensuring it was structurally sound.", author: "Jessica M.", neighborhood: "Cobble Hill" },
+        { quote: "From the initial consultation to the final cleanup, Mr. Tee and his sons were fantastic. Highly recommended.", author: "David P.", neighborhood: "Bay Ridge" },
+        { quote: "Our driveway and concrete steps look brand new. The quality of the finish is outstanding.", author: "Brian K.", neighborhood: "Bensonhurst" }
+      ];
+      const carouselContainer = document.querySelector('.secondary-testimonials-carousel');
+      if (carouselContainer) {
+        const track = carouselContainer.querySelector('.testimonial-track');
+        const dotsContainer = carouselContainer.querySelector('.testimonial-dots');
+        testimonialsData.forEach((t) => {
+          const slide = document.createElement('li');
+          slide.className = 'testimonial-slide';
+          slide.innerHTML = `<div class="testimonial-card"><blockquote>${t.quote}</blockquote><footer>— ${t.author}, ${t.neighborhood}</footer></div>`;
+          track.appendChild(slide);
+        });
+        const slides = Array.from(track.children);
+        const nextButton = carouselContainer.querySelector('.testimonial-nav.next');
+        const prevButton = carouselContainer.querySelector('.testimonial-nav.prev');
+        let slideIndex = 0; let itemsPerPage = 3;
+        const updateTestimonialItems = () => {
+            const width = window.innerWidth;
+            if (width < 768) itemsPerPage = 1; else if (width < 1024) itemsPerPage = 2; else itemsPerPage = 3;
+            slides.forEach(slide => slide.style.width = `${100 / itemsPerPage}%`);
+        };
+        let totalPages = Math.ceil(slides.length / itemsPerPage);
+        const setupDots = () => {
+            dotsContainer.innerHTML = '';
+            totalPages = Math.ceil(slides.length / itemsPerPage);
+            for(let i=0; i < totalPages; i++) {
+                const dot = document.createElement('button'); dot.className = 'testimonial-dot';
+                dot.addEventListener('click', () => moveToPage(i)); dotsContainer.appendChild(dot);
+            }
+        };
+        const moveToPage = (pageIndex) => {
+          track.style.transform = `translateX(-${pageIndex * 100}%)`; slideIndex = pageIndex; updateTestimonialControls();
+        };
+        const updateTestimonialControls = () => {
+          prevButton.disabled = slideIndex === 0;
+          nextButton.disabled = slideIndex >= totalPages - 1;
+          Array.from(dotsContainer.children).forEach((dot, index) => dot.classList.toggle('active', index === slideIndex));
+        };
+        nextButton.addEventListener('click', () => moveToPage(slideIndex + 1));
+        prevButton.addEventListener('click', () => moveToPage(slideIndex - 1));
+        const handleTestimonialResize = () => { updateTestimonialItems(); setupDots(); moveToPage(0); };
+        window.addEventListener('resize', handleTestimonialResize);
+        updateTestimonialItems(); setupDots(); moveToPage(0);
+      }
+      
+      const faqItems = document.querySelectorAll('.faq-accordion details');
+      faqItems.forEach(item => {
+        item.addEventListener('toggle', (event) => {
+          if (item.open) {
+            faqItems.forEach(otherItem => { if (otherItem !== item) otherItem.open = false; });
+          }
+        });
+      });
+
+      const purposeSelect = document.getElementById('form-purpose');
+      if(purposeSelect) {
+        const serviceGroup = document.getElementById('service-group');
+        const feedbackGroup = document.getElementById('feedback-group');
+        const messageLabel = document.getElementById('message-label');
+        const messageTextarea = document.getElementById('message');
+        purposeSelect.addEventListener('change', function() {
+          const isQuote = this.value === 'quote';
+          serviceGroup.classList.toggle('form-group-hidden', !isQuote);
+          feedbackGroup.classList.toggle('form-group-hidden', isQuote);
+          messageLabel.textContent = isQuote ? 'Project Details' : 'Your Feedback';
+          messageTextarea.placeholder = isQuote ? 'Tell us about your project…' : 'Please share your feedback with us…';
+        });
+      }
+
+      const quoteForm = document.getElementById('quoteForm');
+      if(quoteForm){
+        const submitBtn = document.getElementById('submitBtn');
+        quoteForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const originalText = submitBtn.innerHTML;
+          submitBtn.textContent = 'Sending...'; submitBtn.disabled = true;
+          setTimeout(() => {
+            submitBtn.innerHTML = 'Sent!'; submitBtn.classList.add('sent');
+            setTimeout(() => {
+              quoteForm.reset(); submitBtn.innerHTML = originalText;
+              submitBtn.disabled = false; submitBtn.classList.remove('sent');
+              if (purposeSelect) purposeSelect.dispatchEvent(new Event('change'));
+            }, 3000);
+          }, 1500);
+        });
+      }
+      
+      const lightboxContainer = document.getElementById('lightbox-container');
+      document.body.addEventListener('click', function(e) {
+        const item = e.target.closest('.gallery-item');
+        if (item && lightboxContainer) {
+          const imgSrc = item.querySelector('img').src;
+          const altText = item.querySelector('img').alt;
+          lightboxContainer.innerHTML = `<div class="lightbox active"><div class="lightbox-content"><span class="close-lightbox">&times;</span><img src="${imgSrc}" alt="${altText}"></div></div>`;
+          const closeBtn = lightboxContainer.querySelector('.close-lightbox');
+          const lightboxBg = lightboxContainer.querySelector('.lightbox');
+          closeBtn.addEventListener('click', () => { lightboxContainer.innerHTML = ''; });
+          lightboxBg.addEventListener('click', (ev) => { if(ev.target === lightboxBg) { lightboxContainer.innerHTML = ''; } });
+        }
+      });
+
+      const showcaseMenuLinks = document.querySelectorAll('.showcase-menu a');
+      const galleryCategories = document.querySelectorAll('.gallery-category');
+      const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            showcaseMenuLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+            });
+          }
+        });
+      }, { rootMargin: '-40% 0px -60% 0px' });
+      galleryCategories.forEach(category => scrollObserver.observe(category));
+
+      const fadeInElements = document.querySelectorAll('.fade-in-on-scroll');
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        fadeInElements.forEach(el => observer.observe(el));
+      } else {
+        fadeInElements.forEach(el => el.classList.add('is-visible'));
+      }
+    });
+  </script>
+</body>
+</html>

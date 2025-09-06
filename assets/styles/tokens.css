@@ -1,0 +1,50 @@
+/* Design Tokens: colors, typography, spacing, radii */
+:root {
+  /* Palette: approachable + premium, Swiss-inspired */
+  --color-bg: #ffffff;
+  --color-page: #fcfcfc; /* subtle off‑white for sections */
+  --color-ink: #111111;  /* primary text */
+  --color-ink-2: #222222; /* headings */
+  --color-muted: #6b6b6b; /* secondary text */
+  --color-border: #e6e6e6; /* hairlines */
+
+  /* Accent (from assets/original.html) */
+  --brand-red-600: #e43b28; /* primary accent */
+  --brand-red-700: #e43b28; /* hover/active */
+  --brand-red-050: #fff2ef; /* light tint */
+  --brand-red-100: #fde7e4; /* section wash */
+
+  --accent: var(--brand-red-600);
+  --accent-hover: var(--brand-red-700);
+
+  /* Typography */
+  --font-sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Type scale (refined, slightly smaller) */
+  --fs-xxl: clamp(2.1rem, 5vw, 3.2rem);
+  --fs-xl: clamp(1.5rem, 3vw, 2rem);
+  --fs-lg: clamp(1.125rem, 1.8vw, 1.375rem);
+  --fs-md: 0.95rem;
+  --fs-sm: 0.85rem;
+
+  /* Spacing – 4px baseline */
+  --space-1: 0.25rem; /* 4 */
+  --space-2: 0.5rem;  /* 8 */
+  --space-3: 0.75rem; /* 12 */
+  --space-4: 1rem;    /* 16 */
+  --space-5: 1.5rem;  /* 24 */
+  --space-6: 2rem;    /* 32 */
+  --space-7: 3rem;    /* 48 */
+  --space-8: 4rem;    /* 64 */
+
+  /* Layout */
+  --container-max: 100%;   /* essentially full-width pages */
+  --container-pad: 1rem; /* slightly increased side padding (~16px) */
+  --measure: 68ch;         /* comfortable reading measure */
+  --radius-1: 4px;
+  --radius-2: 8px;
+  --shadow-1: 0 2px 8px rgba(0,0,0,0.06);
+}
