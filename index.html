@@ -37,6 +37,7 @@
         margin-top: clamp(3.75rem, 10.5vw, 7.5rem);
         padding-block: var(--section-pad-y);
         padding-inline: var(--about-pad);
+        margin-bottom: -100px; /* tighten gap to next section by 100px */
       }
       /* Right column larger per inspo (~42/58) */
       .about-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: start; transform: translateY(-150px); }
@@ -70,10 +71,10 @@
       .visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
 
       /* Short two-column (Vision Forge) */
-      .short-section { padding-block: var(--section-pad-y); padding-inline: var(--about-pad, clamp(2rem, 8vw, 6rem)); }
+      .short-section { padding-block: var(--section-pad-y); padding-inline: var(--about-pad, clamp(2rem, 8vw, 6rem)); margin-top: -100px; }
       .short-grid { display: grid; grid-template-columns: 9fr 11fr; gap: clamp(2.25rem, 5vw, 3.5rem); align-items: start; }
       @media (max-width: 900px) { .short-grid { grid-template-columns: 1fr; } }
-      .short-left h2 { font-size: var(--fs-xl); line-height: 1.15; margin: 0 0 .5rem; }
+      .short-left h2 { font-size: var(--fs-xl); line-height: 1.15; margin: 0 0 .5rem; font-weight: 700; letter-spacing: .01em; }
       .short-intro { font-size: var(--fs-md); line-height: 1.5; color: var(--color-muted); margin-bottom: 1.1rem; max-width: 48ch; }
       .short-left-figure { margin: 0; }
       .short-right-figure { margin: 0 0 1.25rem 0; }
@@ -87,6 +88,32 @@
       .faq-icon { font-size: 1.25rem; line-height: 1; color: var(--color-ink-2); }
       .faq-a { overflow: hidden; max-height: 0; opacity: 0; margin-top: 0; transition: max-height 260ms ease, opacity 220ms ease, margin-top 220ms ease; }
       .faq-a p { margin: 0; font-size: var(--fs-md); color: var(--color-muted); line-height: 1.5; }
+
+      /* Why Choose Us (3-up testimonials with avatars) */
+      .why-choose { background: #fff; padding-inline: var(--about-pad, clamp(2rem, 8vw, 6rem)); margin-top: 150px; margin-bottom: var(--section-pad-y); }
+      .why-head { text-align: center; margin-bottom: clamp(2rem, 3.5vw, 2.5rem); }
+      .why-head h2 { letter-spacing: .01em; font-size: var(--fs-xl); margin: 0 0 .5rem; font-weight: 700; }
+      .why-sub { font-size: var(--fs-md); color: var(--color-muted); margin: 0; }
+      .why-sub a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+      .why-viewport { position: relative; overflow: hidden; }
+      .why-track { display: flex; will-change: transform; transition: transform 640ms ease-in-out; }
+      .why-slide { flex: 0 0 100%; }
+      .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(2rem, 4.5vw, 3rem); align-items: start; }
+      @media (max-width: 980px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+      @media (max-width: 640px) { .why-grid { grid-template-columns: 1fr; } }
+      .why-item { text-align: center; max-width: 46ch; margin-inline: auto; }
+      .why-card { padding: var(--space-5); border: 1px solid var(--color-border); border-radius: var(--radius-2); background: #fff; box-shadow: var(--shadow-1); }
+      .avatar { --size: 56px; width: var(--size); height: var(--size); border-radius: 50%; border: 1px solid var(--color-border); background: #eef1f5; color: var(--color-ink-2); display: grid; place-items: center; font-weight: 700; margin: 0 auto clamp(.9rem, 2vw, 1.1rem); box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+      @media (max-width: 900px) { .avatar { --size: 48px; } }
+      @media (max-width: 600px) { .avatar { --size: 40px; } }
+      .why-title { font-size: var(--fs-lg); margin: 0 0 .5rem; font-weight: 500; }
+      .why-text { font-size: var(--fs-md); color: var(--color-muted); margin: 0 0 .75rem; line-height: 1.6; }
+      .why-meta { font-size: var(--fs-sm); color: var(--color-muted); }
+      .why-controls { display: flex; align-items: center; justify-content: center; gap: .75rem; margin-top: clamp(1rem, 2.5vw, 1.5rem); }
+      .why-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--color-border); border: 0; padding: 0; cursor: pointer; }
+      .why-dot.is-active { background: var(--color-ink-2); }
+      .why-arrow { appearance: none; background: #fff; border: 1px solid var(--color-border); color: var(--color-ink-2); padding: .35rem .6rem; border-radius: 999px; cursor: pointer; }
+      .why-arrow:hover { border-color: var(--accent); color: var(--accent); }
     </style>
   </head>
   <body>
@@ -225,6 +252,8 @@
           </div>
         </div>
       </section>
+
+      <!-- Testimonials section removed per direction -->
     </main>
 
 

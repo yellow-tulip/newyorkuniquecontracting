@@ -18,8 +18,9 @@ space, and a trustworthy, professional tone. Business context lives in
        left and subtly bleeds into the right column (sits behind text).
      - Right: lead paragraph and a 2×2 metrics grid (#2, 450+, 200+, 20 years)
        with left‑aligned labels beneath each value.
-   - No testimonials carousel; the former block was removed for clarity and
-     replaced by the About + Metrics composition.
+     - Tightened visual gap to the next section by trimming bottom spacing.
+   - Vision Forge section (2‑column) with right image and FAQ accordion.
+   - Testimonials/Why‑Choose‑Us: temporarily removed per direction.
 -  About, Services/Portfolio, FAQ, Contact (stubs)
 
 Focus is visual design and client‑side only (no backend).
@@ -35,8 +36,8 @@ Focus is visual design and client‑side only (no backend).
 
 ### Typography Scale (Universal)
 - Root headings
-  - `h1` → `--fs-xxl` = `clamp(2.3rem, 5.2vw, 3.6rem)`
-  - `h2` → `--fs-xl` = `clamp(1.625rem, 2.8vw, 2.125rem)`
+  - `h1` → `--fs-xxl` = `clamp(2.3rem, 5.2vw, 3.6rem)`; weight 600
+  - `h2` → `--fs-xl` = `clamp(1.625rem, 2.8vw, 2.125rem)`; weight 600
   - `h3` → `--fs-lg` = `clamp(1.0625rem, 1.9vw, 1.4375rem)`
 - Body text → `--fs-md` = `1rem` (with body base 17px)
 - Small text (labels, captions) → `--fs-sm` = `0.9rem`
@@ -50,6 +51,7 @@ Focus is visual design and client‑side only (no backend).
   - `.section { padding-block: var(--section-pad-y); }`
   - `.section + .section { margin-top: var(--section-gap-y); padding-top: 0; }`
   - `.section > :last-child { margin-bottom: 0; }` to avoid trailing paragraph margins inflating gaps.
+  - About + Metrics uses a small negative bottom margin to compensate for its internal upward transform, reducing the visual gap before Vision Forge by ~100px.
 
 ---
 
