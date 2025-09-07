@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact — NY Unique Contracting</title>
+    <meta name="description" content="Contact NY Unique Contracting" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles/tokens.css">
+    <link rel="stylesheet" href="assets/styles/base.css">
+    <link rel="stylesheet" href="assets/styles/components.css">
+  </head>
+  <body>
+    <main>
+      <div class="grid-shell container">
+        <header class="masthead nav">
+          <div class="brand">NY Unique Contracting<sup>®</sup></div>
+          <nav class="nav-center">
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="portfolio.html">Projects</a>
+            <a href="contact.html">Contact</a>
+          </nav>
+          <nav class="nav-right">
+            <a class="cta-link" href="contact.html">Start a project</a>
+          </nav>
+          <div id="progress-h" aria-hidden="true"><div class="bar"></div></div>
+        </header>
+      </div>
+
+      <section class="container section" aria-label="Contact">
+        <h1>Contact</h1>
+        <p class="measure">Content coming soon.</p>
+      </section>
+    </main>
+    <script>
+      (function(){
+        const links = document.querySelectorAll('.nav a');
+        links.forEach(a=>{
+          a.addEventListener('click', ()=>{
+            a.classList.add('is-pump');
+            a.addEventListener('animationend', ()=> a.classList.remove('is-pump'), {once:true});
+          });
+        });
+      })();
+      (function(){
+        const masthead = document.querySelector('.masthead');
+        const progressBar = document.querySelector('#progress-h .bar');
+        if (!masthead) return;
+        const setOffset = () => {
+          const h = masthead.offsetHeight;
+          document.documentElement.style.setProperty('--header-offset', h + 'px');
+          document.body.style.paddingTop = h + 'px';
+        };
+        setOffset();
+        const ro = new ResizeObserver(setOffset);
+        ro.observe(masthead);
+        window.addEventListener('resize', setOffset);
+        window.addEventListener('load', setOffset);
+        if (document.fonts && document.fonts.ready) { document.fonts.ready.then(setOffset).catch(()=>{}); }
+        const onScroll = () => {
+          if (!progressBar) return;
+          const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+          const p = scrollMax > 0 ? (window.scrollY / scrollMax) : 0;
+          progressBar.style.width = Math.max(0, Math.min(1, p)) * 100 + '%';
+        };
+        window.addEventListener('scroll', onScroll, {passive: true});
+        window.addEventListener('resize', onScroll);
+        onScroll();
+      })();
+    </script>
+  </body>
+ </html>

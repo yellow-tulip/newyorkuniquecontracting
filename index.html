@@ -7,7 +7,7 @@
     <meta name="description" content="Masonry and concrete done right. Clear, precise, and dependable." />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles/tokens.css">
     <link rel="stylesheet" href="assets/styles/base.css">
     <link rel="stylesheet" href="assets/styles/components.css">
@@ -120,17 +120,18 @@
     <main>
       <div class="grid-shell container">
         <!-- Masthead (replicated from inspo 1) -->
-        <header class="masthead nav" style="padding-block: var(--space-5)">
+        <header class="masthead nav">
           <div class="brand">NY Unique Contracting<sup>®</sup></div>
           <nav class="nav-center">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="portfolio.html">Projects</a>
+            <a href="contact.html">Contact</a>
           </nav>
           <nav class="nav-right">
-            <a class="cta-link" href="#start">Start a project</a>
+            <a class="cta-link" href="contact.html">Start a project</a>
           </nav>
+          <div id="progress-h" aria-hidden="true"><div class="bar"></div></div>
         </header>
 
         <!-- Intro copy aligned to the centerline (right column) -->
@@ -154,12 +155,12 @@
             <div class="ticker__track">
               <div class="ticker__content" aria-hidden="true">
                 <span>NEW YORK UNIQUE CONTRACTING EST. 2005 - LICENSED &amp; INSURED - (718) 338-3413</span>
-                <span>NEW YORK UNIQUE CONTRACTING EST. 2005 - LICENSED &amp; INSURED - (718) 338-3413</span>
+                <span>HOURS MON–SAT 7AM–7PM · SUN CLOSED</span>
               </div>
               <!-- Duplicate for seamless loop -->
               <div class="ticker__content" aria-hidden="true">
                 <span>NEW YORK UNIQUE CONTRACTING EST. 2005 - LICENSED &amp; INSURED - (718) 338-3413</span>
-                <span>NEW YORK UNIQUE CONTRACTING EST. 2005 - LICENSED &amp; INSURED - (718) 338-3413</span>
+                <span>HOURS MON–SAT 7AM–7PM · SUN CLOSED</span>
               </div>
             </div>
           </div>
@@ -212,12 +213,12 @@
             <h2 id="vision-title">Vision Forge</h2>
             <p class="short-intro">Where dreams take shape, creating unforgettable architecture. Vendors with expert craftsmanship and precision execution, transforming inspiration into magnificent, enduring structures.</p>
             <figure class="short-left-figure img-card ratio-4x5">
-              <img src="assets/images/stone3.jpg" alt="Metal grinding with sparks flying" class="cover" />
+              <div class="frame ratio-4x5 demo-img" role="img" aria-label="Project photo placeholder"></div>
             </figure>
           </div>
           <div class="short-right">
             <figure class="short-right-figure img-card ratio-3x2">
-              <img src="assets/images/stone.webp" alt="Framed building under construction with blue sky" class="cover" />
+              <div class="frame ratio-3x2 demo-img" role="img" aria-label="Project photo placeholder"></div>
             </figure>
 
             <div class="faq" id="faq-vision">
@@ -257,10 +258,84 @@
     </main>
 
 
-    <footer class="container" style="padding-block: var(--space-6)">
-      <small style="color: var(--color-muted)">© 2025 NY Unique Contracting</small>
+    <footer class="site-footer section">
+      <div class="container footer-grid">
+        <div class="footer-col">
+          <div class="footer-title">Company</div>
+          <div>NY Unique Contracting Inc.</div>
+          <div>7802 21st Ave Apt C3</div>
+          <div>Brooklyn, NY 11214</div>
+          <div><a href="tel:+17183383413">(718) 338-3413</a></div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title">Hours</div>
+          <div>Mon–Sat: 7am – 7pm</div>
+          <div>Sun: Closed</div>
+          <div class="footer-sub">Licensed &amp; Insured</div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title">Licenses</div>
+          <div>LIC #1192706</div>
+          <div>LIC #1192710</div>
+          <div>Contractor ID: 611278</div>
+        </div>
+        <div class="footer-col">
+          <div class="footer-title">Links</div>
+          <div><a href="https://www.yelp.com/search?find_desc=New%20York%20Unique%20Contracting%20Inc&find_loc=Brooklyn%2C%20NY" target="_blank" rel="noopener">Yelp</a></div>
+          <div><a href="https://www.angi.com/companylist/search/?q=New%20York%20Unique%20Contracting%20Inc" target="_blank" rel="noopener">Angi</a></div>
+          <div><a href="https://www.google.com/search?q=New+York+Unique+Contracting+Inc" target="_blank" rel="noopener">Google</a></div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <small>© 2025 NY Unique Contracting</small>
+      </div>
     </footer>
     <script>
+      // Nav pump micro-interaction
+      (function(){
+        const links = document.querySelectorAll('.nav a');
+        links.forEach(a=>{
+          a.addEventListener('click', ()=>{
+            a.classList.add('is-pump');
+            a.addEventListener('animationend', ()=> a.classList.remove('is-pump'), {once:true});
+          });
+        });
+      })();
+
+      // Fixed header offset + horizontal progress bar
+      (function(){
+        const masthead = document.querySelector('.masthead');
+        const progressBar = document.querySelector('#progress-h .bar');
+        if (!masthead) return;
+
+        // Keep content clear of fixed header; update on resize and content changes
+        const setOffset = () => {
+          const h = masthead.offsetHeight;
+          document.documentElement.style.setProperty('--header-offset', h + 'px');
+          document.body.style.paddingTop = h + 'px';
+        };
+        setOffset();
+        // Recalc on various lifecycle events
+        const ro = new ResizeObserver(setOffset);
+        ro.observe(masthead);
+        window.addEventListener('resize', setOffset);
+        window.addEventListener('load', setOffset);
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(setOffset).catch(()=>{});
+        }
+
+        // Horizontal scroll progress
+        const onScroll = () => {
+          if (!progressBar) return;
+          const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+          const p = scrollMax > 0 ? (window.scrollY / scrollMax) : 0;
+          progressBar.style.width = Math.max(0, Math.min(1, p)) * 100 + '%';
+        };
+        window.addEventListener('scroll', onScroll, {passive: true});
+        window.addEventListener('resize', onScroll);
+        onScroll();
+      })();
+
       // Accordion: all closed by default; open one closes others; smooth transitions
       (function(){
         const root = document.getElementById('faq-vision');
