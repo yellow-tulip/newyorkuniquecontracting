@@ -1,53 +1,57 @@
-# New York Unique Contracting — Website Redesign (Swiss/Grid Inspired)
+# New York Unique Contracting — Website (Swiss/Grid Inspired)
 
-This repository contains the front‑end redesign of our small business website. More information about the business can be found in `business-info.md`.
-The site follows a Swiss/grid‑inspired composition with restrained type, ample negative space, and a trustworthy, professional tone.
+This repository contains the production version of our small‑business website.
+It follows a Swiss/grid‑inspired composition with restrained type, ample negative
+space, and a trustworthy, professional tone. Business context lives in
+`business-info.md`.
 
 --
 
-## Project Goals
+## Current Pages and Intent
 
--   Create a **5-page static site** to build credibility and generate leads:
-    -   **Home / Landing** — Showcase core services (masonry, concrete, patios), feature project gallery, highlight key testimonials, and display reputation badges ("NYC DOB Certified," "Licensed & Insured") and social media (Angi's, Google, Yelp). 
-    -   **About Us** — Introduce Mr. T and the family-run team, share the company's 20+ year story, and outline their values of professionalism, communication, and fair pricing.
-    -   **Services & Portfolio** — A full menu of services and gallery of work, filterable by category: `Masonry & Brickwork`, `Patios & Walkways`, `Concrete`, `Roofing & Gutters`, and `Waterproofing`, and more (as noted in ['business-info.md']
-    -   **FAQ** — An expandable Q&A section to address common client questions.
-    -   **Contact** — A simple contact form (front-end only) with the business address, phone, and hours prominently displayed. We will replicate the contact form that is in ['assets/original.html']
--   Focus on **visual design and front-end interaction only**.
-    - Composition, hierarchy, pacing
-    - Placeholder images (grey blocks) and filler text
-    - Color palette, hover states, microinteractions
-    - Clear information architecture
--   Establish a clear and maintainable workflow using a modern, utility-first CSS framework.
+-  Home / Landing
+   - Hero intro with conservative, bold headline.
+   - Thin monospaced ticker banner (exact pacing preserved).
+   - About + Metrics section inspired by `assets/inspo/homeabout.png`:
+     - Two columns with a right‑dominant split (5fr / 7fr).
+     - Left: architectural wireframe style visual that aligns to the viewport
+       left and subtly bleeds into the right column (sits behind text).
+     - Right: lead paragraph and a 2×2 metrics grid (#2, 450+, 200+, 20 years)
+       with left‑aligned labels beneath each value.
+   - No testimonials carousel; the former block was removed for clarity and
+     replaced by the About + Metrics composition.
+-  About, Services/Portfolio, FAQ, Contact (stubs)
+
+Focus is visual design and client‑side only (no backend).
 
 ---
 
 ## Design Principles
 
-- Swiss/grid composition; eye guided by spacing, not rules.
-- Clean sans‑serif typography with restrained sizes and tight tracking for headings.
-- Neutral palette with a single red accent used sparingly.
-- Accessibility: respect `prefers-reduced-motion` and maintain strong contrast.
+- Swiss/grid composition; pacing through spacing and negative space.
+- Inter/system sans, restrained scale (hero ~3.6rem max; metrics 44–64px).
+- Neutral palette with a subtle red accent for CTAs; body copy is grayscale.
+- Accessibility: respect `prefers-reduced-motion`; strong contrast.
 
 ---
 
 ## Tech Stack
 
-- HTML5, CSS (vanilla)
-- No build step required; serve statically.
+- HTML5, CSS (vanilla); no build step.
 
 ---
 
 ## File Structure
 
-- Root pages: `index.html`, `about.html`, `contact.html`, `faq.html`, `portfolio.html`
-- Assets: `assets/` (images, styles). Inspiration references in `assets/inspo/` must not be embedded.
+- Root pages: `index.html`, `about.html`, `contact.html`, `faq.html`, `portfolio.html` (stubs for now)
+- Assets: `assets/` static files; `assets/inspo/` is reference‑only (do not link in production pages)
 - Styles: `assets/styles/tokens.css`, `assets/styles/base.css`, `assets/styles/components.css`
 
 ---
 
-## Codex Update Rules
-Whenever Codex generates or modifies files, whenever a new componenet, page, or design rule is added, `README.md` must be updated accordingly in the same commit with descriptive messages.
+## Maintenance Notes
+When files, sections, or design rules change, update `README.md` in the same
+commit with a short rationale. Use Conventional Commits.
 
 ---
 
@@ -74,10 +78,10 @@ All company-specific details (services, tagline, testimonials, story) are mainta
 ---
 
 ### 🗺 Roadmap (Working)
-1) Landing hero (replicate swiss/9.jpg composition; placeholders only)
-2) Navigation and basic pages (full‑width, subtle padding)
-3) Portfolio grid with neutral placeholders
-4) Content pages (copy from `business-info.md`)
+1) Polish About + Metrics on small screens (typographic scale + stack order)
+2) Build Services and Portfolio pages (content from `business-info.md`)
+3) Replace placeholder visuals with optimized images (`.webp`)
+4) Add contact page form (front‑end only)
 
 ---
 

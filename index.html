@@ -28,43 +28,40 @@
       .ticker__dot { opacity: 0.45; }
       @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-      /* Testimonials & reputation section */
-      .reputation { padding-block: var(--space-7); padding-inline: var(--space-5); }
-      .reputation-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: var(--space-6); align-items: start; }
-      @media (max-width: 900px) { .reputation-grid { grid-template-columns: 1fr; } }
+      /* About + Metrics section (replaces testimonials) */
+      .about-metrics {
+        --about-pad: clamp(2rem, 8vw, 6rem);
+        margin-top: clamp(3.75rem, 10.5vw, 7.5rem);
+        padding-block: clamp(4rem, 10vw, 8rem);
+        padding-inline: var(--about-pad);
+      }
+      /* Right column larger per inspo (~42/58) */
+      .about-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: start; transform: translateY(-150px); }
+      @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
 
-      .testimonial-feature blockquote { font-size: clamp(1.15rem, 2.2vw, 1.35rem); line-height: 1.55; margin: 0; font-weight: 500; color: var(--color-ink-2); }
-      .testimonial-feature blockquote q { quotes: "\201C" "\201D" "\2018" "\2019"; }
-      .testimonial-feature blockquote q::before { content: open-quote; }
-      .testimonial-feature blockquote q::after { content: close-quote; }
-      .testimonial-feature figcaption { margin-top: var(--space-3); font-size: var(--fs-sm); color: var(--color-muted); }
+      /* Left visual: neutral wireframe placeholder (no inspo asset linking) */
+      .about-visual { position: relative; z-index: 0; }
+      /* Full-bleed wireframe that aligns to viewport left and sits behind text */
+      .about-wireframe { width: calc(100vw - 325px); margin-inline: calc(50% - 50vw); height: clamp(420px, 42vw, 640px); background: repeating-linear-gradient(0deg, #eff2f6 0 1px, transparent 1px 24px), repeating-linear-gradient(90deg, #eff2f6 0 1px, transparent 1px 24px); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); z-index: 0; pointer-events: none; }
+      .about-breadcrumb { position: absolute; top: .5rem; left: calc(50% - 50vw + .5rem); font-size: var(--fs-sm); color: var(--color-muted); background: rgba(255,255,255,.7); padding: .25rem .5rem; border-radius: 4px; }
 
-      /* Rating badges (thin cards) */
-      .rating-badges { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-5); }
-      .badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0.75rem; border: 1px solid var(--color-border); border-radius: 999px; font-size: var(--fs-sm); color: var(--color-ink-2); background: #fff; }
-      .badge .stars { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; letter-spacing: 0.05em; }
-      .badge:hover { border-color: var(--accent); color: var(--accent); }
+      /* Right column typography */
+      .about-lead { font-size: clamp(1.25rem, 2.2vw, 1.875rem); line-height: 1.35; color: var(--color-ink-2); max-width: 48ch; }
+      .about-lead .accent { color: inherit; font-weight: 500; }
 
-      /* Supporting quotes list (right column) */
-      .carousel { display: grid; gap: var(--space-4); }
-      .carousel-head { display: flex; justify-content: end; gap: var(--space-2); }
-      .carousel-btn { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--color-border); background: #fff; color: var(--color-ink-2); border-radius: 999px; cursor: pointer; }
-      .carousel-btn:hover { border-color: var(--accent); color: var(--accent); }
-      .carousel-viewport { min-height: 280px; }
-      .quote-list { display: grid; gap: var(--space-4); }
-      .quote-card { margin: 0; padding: var(--space-5); border: 1px solid var(--color-border); border-left: 4px solid var(--accent); border-radius: var(--radius-2); background: #fff; box-shadow: var(--shadow-1); color: var(--color-ink); }
-      .quote-card p { margin: 0; }
-      .quote-card footer { margin-top: var(--space-2); font-size: var(--fs-sm); color: var(--color-muted); }
+      .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.75rem, 3.5vw, 2.5rem) clamp(1.5rem, 2.75vw, 2.5rem); margin-top: clamp(1.5rem, 3vw, 2.25rem); justify-items: start; }
+      .metric { display: grid; align-content: start; gap: .5rem; }
+      .metric .number { font-size: clamp(2.75rem, 5.5vw, 4rem); line-height: 1; font-weight: 500; color: var(--color-ink-2); letter-spacing: -0.01em; }
+      .metric .prefix { font-size: .36em; vertical-align: baseline; margin-right: .25em; color: var(--color-muted); }
+      .metric .suffix { font-size: .34em; vertical-align: super; letter-spacing: .01em; color: var(--color-muted); }
+      .metric .label { font-size: 0.85rem; color: var(--color-muted); }
+      .metrics dt, .metrics dd { margin: 0; }
+      .metric { text-align: left; }
 
-      /* Simple transition for swapping sets */
-      .carousel-viewport.anim-out-up { animation: fadeOutUp .18s ease both; }
-      .carousel-viewport.anim-in-up { animation: fadeInUp .20s ease both; }
-      .carousel-viewport.anim-out-down { animation: fadeOutDown .18s ease both; }
-      .carousel-viewport.anim-in-down { animation: fadeInDown .20s ease both; }
-      @keyframes fadeOutUp { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-8px); } }
-      @keyframes fadeInUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-      @keyframes fadeOutDown { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(8px); } }
-      @keyframes fadeInDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+      .about-caption { margin-top: 128px; font-size: 0.875rem; color: var(--color-muted); max-width: 60ch; }
+
+      /* Ensure text sits above the bleeding image */
+      .about-text { position: relative; z-index: 1; }
 
       /* A11y: screen-reader-only heading helper */
       .visually-hidden { position: absolute !important; height: 1px; width: 1px; overflow: hidden; clip: rect(1px, 1px, 1px, 1px); white-space: nowrap; }
@@ -122,131 +119,108 @@
 
       <!-- Removed styleguide and sample sections per direction -->
 
-      <!-- Testimonials & reputation -->
-      <section class="reputation container" aria-labelledby="reputation-title">
-        <div class="reputation-grid">
-          <!-- Left column: featured testimonial + badges -->
-          <div>
-            <h2 id="reputation-title" class="visually-hidden">Testimonials &amp; Reputation</h2>
-            <figure class="testimonial-feature">
-              <blockquote>
-                <q>In one week they transformed our 600 sq ft cracked and nasty concrete patio into a bluestone paradise. They were professionals, and stopped to ask our input at each step. It was by far the best experience we've had working with contractors in NYC.</q>
-              </blockquote>
-              <figcaption>— Mike F., Yelp (5 stars)</figcaption>
-            </figure>
-
-            <div class="rating-badges" aria-label="Review site ratings">
-              <a class="badge" href="https://www.yelp.com/search?find_desc=New%20York%20Unique%20Contracting%20Inc&find_loc=Brooklyn%2C%20NY" target="_blank" rel="noopener" aria-label="View Yelp reviews">
-                <span>Yelp</span>
-                <span class="stars">★★★★★</span>
-                <span>(5.0 · 7)</span>
-              </a>
-              <a class="badge" href="https://www.angi.com/companylist/search/?q=New%20York%20Unique%20Contracting%20Inc" target="_blank" rel="noopener" aria-label="View Angi reviews">
-                <span>Angi</span>
-                <span class="stars">★★★★☆</span>
-                <span>(4.6 · 21)</span>
-              </a>
-              <a class="badge" href="https://www.google.com/search?q=New+York+Unique+Contracting+Inc" target="_blank" rel="noopener" aria-label="View Google reviews">
-                <span>Google</span>
-                <span class="stars">★★★★☆</span>
-                <span>(4.7 · 14)</span>
-              </a>
-            </div>
+      <!-- About + metrics (inspiration: assets/inspo/homeabout.png) -->
+      <section class="about-metrics container" aria-label="About NY Unique Contracting">
+        <div class="about-grid">
+          <!-- Left: illustrative wireframe placeholder; replace with production image when ready -->
+          <div class="about-visual" aria-hidden="true">
+            <span class="about-breadcrumb">/About us</span>
+            <div class="about-wireframe" role="img" aria-label="Architectural illustration placeholder"></div>
           </div>
 
-          <!-- Right column: carousel of supporting testimonials -->
-          <div class="carousel" aria-label="More customer quotes">
-            <div class="carousel-head">
-              <button class="carousel-btn" id="t-prev" aria-label="Show previous testimonials" title="Previous">↑</button>
-              <button class="carousel-btn" id="t-next" aria-label="Show next testimonials" title="Next">↓</button>
-            </div>
-            <div class="carousel-viewport" id="t-viewport">
-              <div class="quote-list" id="t-list">
-                <!-- Filled by script -->
+          <!-- Right: lead statement + 2x2 stats + mission line -->
+          <div class="about-text">
+            <p class="about-lead">At Obelisq Construction, <span class="accent">we believe that</span> great <span class="accent">construction</span> is more than just bricks and mortar — it’s about creating spaces that inspire, endure, and transform lives.</p>
+
+            <dl class="metrics">
+              <div class="metric">
+                <dt class="number"><span class="prefix">#</span>2</dt>
+                <dd class="label">World Construction Company</dd>
               </div>
-            </div>
+              <div class="metric">
+                <dt class="number">450<span class="suffix">+</span></dt>
+                <dd class="label">Project done</dd>
+              </div>
+              <div class="metric">
+                <dt class="number">200<span class="suffix">+</span></dt>
+                <dd class="label">Satisfied Client</dd>
+              </div>
+              <div class="metric">
+                <dt class="number">20 <span class="suffix">years</span></dt>
+                <dd class="label">Year in business</dd>
+              </div>
+            </dl>
+
+            <p class="about-caption">Our Mission is to deliver future-ready infrastructure that combines aesthetic brilliance with functional resilience.</p>
           </div>
         </div>
-    </section>
+      </section>
     </main>
 
 
     <footer class="container" style="padding-block: var(--space-6)">
       <small style="color: var(--color-muted)">© 2025 NY Unique Contracting</small>
     </footer>
-    
-    <!-- Testimonials data (copied from testimonials.md) -->
-    <script type="application/json" id="testimonials-data">[{"author":"Mike F.","source":"Yelp","rating":"5 Stars","text":"\"Danny and Tee were recommended to me by Kong's, a masonry shop in Brooklyn. In one week they transformed our 600 sq ft cracked and nasty concrete patio into a bluestone paradise. They were professionals, and stopped to ask our input at each step, from the stone layouts to the concrete ramps to drainage considerations. It was by far the best experience we've had working with contractors in NYC.\""},{"author":"Cynthia H.","source":"Yelp","rating":"5 Stars","text":"\"Wonderful job on my backyard! Not only was the work perfect but the advice on design was stunning! The project was placing pavers around a spa tub and the whole backyard that was initially dirt and weeds. The owner of this business advised me on the design best suited and suggested adding surrounding flower beds for both beauty and drainage purposes. The paver trim around the tub was attractive and saved me money. His workers were neat and respectful. I would definitely recommend and certainly use them again for another protect . When recent heavy rains occurred a few days after the project was completed and a few pavers sunk (not an uncommon occurrence and not related to their work), he arrived the next morning to fix them.\""},{"author":"Adil T.","source":"Yelp","rating":"5 Stars","text":"\"I hired them to do exterior work, they were very helpful and very understanding, explained details of the work they going to do, they also worked with the tight budget i had and they were very professional and cleaned up very well after the job was done, i will definitely recommend them and i am looking to get more work done in the future.\""},{"author":"Kevin K.","source":"Yelp","rating":"5 Stars","text":"\"New York Unique was very responsive and considerate from the start. His proposal was thorough and fairly priced. The crew worked fast, efficient and delivered a great product. I would recommend them to anyone and will call them next time I need help with a project.\""},{"author":"Tessa M.","source":"Yelp","rating":"5 Stars","text":"\"I recently used New York Unique for a contacting job at my home in Brooklyn. Having experience with prior contractors, I was pleasantly surprised at the efficiency and quality of work Tee (the owner), his son and his crew offered us. Tee's team has a wide range of proficiencies, including masonry, waterproofing and brick work. Tee explained the work he recommended for each job and gave me options which was extremely valuable and rare. The pricing was very fair and attention to detail was excellent. When I had something I wanted adjusted or explained, Tee was always responsive and came to meet me at the house as quickly as he could. This is a family business and they really care about their work and take pride in the end result. I am glad I found them!!\""},{"author":"Frances S.","source":"Yelp","rating":"5 Stars","text":"\"Tee and his crew are professionals and they did a fabulous job repairing the front steps to my home. He personality made sure every brick was replaced and repointed perfectly. The job was completed within the estimated timeframe and his price was excellent! I highly recommend his services.\""},{"author":"Adil R.","source":"Yelp","rating":"5 Stars","text":"\"I called many contractors and was thrown off with crazy prices. Called NEW YORK UNIQUE Contracting. And they came, gave a free estimate and explained how they would work on my house and gave a really negotiable price and was able to give me a really good deal. I was really happy to work with them and they provided me with all insurances. They gave quality work and my wife was really happy since she is very picky with what she wants. I would highly recommend them to anyone who needs good quality work. I would give them 5 stars any day. Thats how much satisfied my family is with their work. Dont hesitate to contact them.\""},{"author":"Anthony D.","source":"Angi","rating":"N/A Stars","text":"“Top notch work! and they worked clean, I would recommend them anytime, thank you new york unique a job well done.”"},{"author":"Allison W.","source":"Angi","rating":"N/A Stars","text":"“NY Unique was extra professional, skilled, on time and honest. I highly recommend their work.”"},{"author":"Pam C.","source":"Angi","rating":"5 Stars","text":"“I wish I could give NY Unique 6 stars! We had about 4 people quote us and they had the most reasonable price and were the only ones who gave us the option of getting brick and granite tiles. They were super professional and worked incredibly quickly - they told us the front steps would be done within a week and they finished in 2 days! They also clearly take pride in their work because the results look amazing. We are already planning to use them again for future projects.”"},{"author":"Mel G.","source":"Angi","rating":"5 Stars","text":"“Work scope invoved replacement of entire sidewalk for corner house. Contractor obtained all permits from NYC and arranged for disposal of debris. Work was completed in two days and quality of work was excellent. Cost of contract was the lowest of 3 bids, by almost 25% (lowest to highest bids).”"},{"author":"Lynn Z.","source":"Angi","rating":"5 Stars","text":"“I found New York Unique Contracting through Home Advisor and I am extremely pleased with this company. Their pricing was very fair and they took pride in their work. Tee, the owner supervised the project from start to finish and communicated with me during every step of the way. He was professional, courteous and his workers were polite and worked very clean. It is refreshing to work with a contractor who is honest and intelligent. I highly recommend New York Unique and will definitely use them again.”"},{"author":"Kiki B.","source":"Angi","rating":"5 Stars","text":"“Amazing service and incredibly responsive. We will absolutely be working with them again.”"},{"author":"Alina R.","source":"Angi","rating":"5 Stars","text":"“Tee was professional and available for my many questions. He came on time, prepped my home accordingly and cleaned up when he was done. His workers worked hard and were respectful. I would highly recommend him to my friends and family.”"},{"author":"Carol J.","source":"Angi","rating":"5 Stars","text":"“Excellent workmanship.”"},{"author":"Ciaran S.","source":"Angi","rating":"5 Stars","text":"“Tee was very nice to deal with. Always responsive. The work was carried out in a very professional manner and the crew cleaned up after. I would highly recommend Tee and NY Unique to others.”"},{"author":"Carol D.","source":"Angi","rating":"5 Stars","text":"“New York Unique Contracting Company did a awesome job on my house. I am a very detailed person and demand perfection. They were able to restore my almost 100 yr. old Tutor home to her former glory. They re pointed all the brick and replaced Lentils and window sills. Mr. T the owner was on the job site and supervised every detail. He is a very patient man and takes pride in his work. I highly recommend this company! I was 100% satisfied !”"},{"author":"Ellis W.","source":"Angi","rating":"5 Stars","text":"“Tee was thoughtful, communicative, did the work and clean-up quickly, and charged a fair price.”"},{"author":"Sophie Y.","source":"Angi","rating":"4.5 Stars","text":"“Tee was very nice to deal with, great communication, and charged a fair price. Excellent workmanship.”"},{"author":"Mordechai M.","source":"Angi","rating":"5 Stars","text":"“Excellent work, excellent service”"},{"author":"Myrna F.","source":"Angi","rating":"4.5 Stars","text":"“Tee was very nice to work with . They where on time and clean up after the work was done.”"},{"author":"Nora F.","source":"Angi","rating":"5 Stars","text":"“Mr. Tee is the person that owns it. He is easy to talk to, professional and respectful. They did a great job on my sidewalk at a reasonable price. I highly recommend the company.”"},{"author":"Keri C.","source":"Angi","rating":"4 Stars","text":"\"Tee of NY Unique was a pleasure to work with. Not only are they affordable they awesome job.”"},{"author":"Christine F.","source":"Angi","rating":"5 Stars","text":"“I was very pleased with New York Unique Contracting, Inc. Tee not only provided an estimate before the work was completed but also made some suggestions which were very helpful. This company shows up on time, performs excellent work and their pricing is very fair for the work provided. I would hire this contractor again.”"},{"author":"John C.","source":"Angi","rating":"5 Stars","text":"“T and his sons did an sons excellent job. Showed up as promised. Thoroughly happy with the work performed. Highly recommend”"},{"author":"Frank D.","source":"Angi","rating":"4 Stars","text":"“Very good and on time”"},{"author":"Beth M.","source":"Angi","rating":"5 Stars","text":"“T and his sons did an excellent job installing our patio. They work quickly and efficiently without compromising quality a bit. They know what they are doing and it shows. I would highly recommend them for this type of project.”"},{"author":"John F. (Negative Review)","source":"Google","rating":"1 Star","text":"“So two years after New York Unique cemented my driveway and sidewalk by the attached pictures you will see i am forced to have the work redone. After 2024 winter the cement started to break apart, after this winter 2025 it’s even worse and I'm embarrassed every time I step outside my home and see my driveway and sidewalk. When I complained to the owner he came by February of 2024 to discuss the issue I'm having. He told me that he could never guarantee the quality of the cement. I shot back that he never once stated this prior to taking my money which amounted to over $20,000 which I took out a loan because I wanted this work done. The owner then suggested i call the cement company and make a complaint regarding the quality of cement. My response was that I did not sign a contract with the cement company i signed a contract with New York Unique contractors. He stated that he would speak to his provider and get back to me. This was 12 months ago! Be careful with this company!”"},{"author":"jc guitarist","source":"Google","rating":"5 Stars","text":"“They did such an incredible job on my backyard deck. Tee and his sons are wonderful people to work with. They were so neat and detailed in their work and built a brick porch and trex deck for me. Outstanding workmanship. I highly recommend hiring them.”"},{"author":"Mîrzà Nomì","source":"Google","rating":"5 Stars","text":"“I am very Impressed with Mr. Tee and his son Adil and Dany . We truly appreciate your commitment on this project. I wanted to acknowledge the satisfaction on our remodel. I must give a 100% satisfied mark as you not only finished the job early and under budget, but with great sub-contractors and excellent workmanship. The job was done very efficiently and timely.”"},{"author":"Connie Cai","source":"Google","rating":"5 Stars","text":"“I am very impressed with Danny T and his team for doing an awesome job in repairing the leakage on my roof, fixing my damaged chimney, and replacing my old skylight. The owner Danny is professional, responsible, and efficient and his price is reasonable. His team did a beatiful job on restoring my front wall molding that I got so many compliments for their craftsmanship. I am very pleased with the job NYU performed on my house. Highly recommend. Connie”"},{"author":"A satisfied client","source":"Google","rating":"N/A","text":""},{"author":"thejnani Family (Negative Review)","source":"Google","rating":"1 Star","text":"“Fake reviews, these guys are absolutely horrible. Will give you fake pricing and charge a bunch of things at the end, use very cheap material when doing the job and charge you an arm and a leg for it. Extremely unprofessional. STAY AWAY!’ **Response from the owner:** Hello sir/madam sorry to hear about your complaint, is it possible you can share your address of the property and the pictures of work we have done for you, so i can cross verify that you’re talking about our company or mistaking us with another company. I’m asking for all this because i couldn’t find your profile on google making sure your profile is not fake."},{"author":"Joseph Agnostino","source":"Google (local guide, 17 reviews, 1 photo)","rating":"5 Stars","text":"“T and his sons did an excellent job installing our patio. They work quickly and efficiently without compromising quality a bit. They know what they are doing and it shows. I would highly recommend them for this type of project.”"},{"author":"T S","source":"Google (5 reviews, 3 photos)","rating":"5 Stars","text":"“As a homeowner of more than 15 years, I've had my share of contractor woes. So when I needed my front yard and sidewalk cemented, I didn't just get bids but I also paid attention to HOW the contractors interacted with me. Spoiler alert: New York Unique Contracting is top notch and I would use their services again in a heartbeat. Absolutely one of my best experiences with a contractor... Out of 10 contractors that I contacted about the job, New York Unique stood above the rest for their customer service, construction knowledge, organization, and quality work. Tee knows how to run a business. He is a punctual man of his word and very reasonable with his pricing. When he wasn't available his sons, Danny & Adil, stepped right in and made sure everything went smoothly and on time... Their crews are so quick and efficient that they finished both jobs way ahead of schedule. I am thrilled with the quality of the work they did on my yards and am more than happy to vouch for their professionalism and fantastic work. Tee, Danny & Adil, thank you for such a great experience!”"},{"author":"Michael Frank","source":"Google (4 reviews)","rating":"5 Stars","text":"“I had Danny and Tee come out to completely redo our back yard in ditmas Park brooklyn. Got 5 quotes. These guys were not cheapest nor the most expensive. But they asked all the right questions. They did a great job. We used 600sq ft of Bluestone and it has transformed our yard. They were great to work with.”"},{"author":"Joan Winter","source":"Google (3 reviews)","rating":"5 Stars","text":"“I highly recommend this company. First- They ( Mr. T) were very communicative, answered all my questions, and got back to me immediately. Their work was great, we ( my coop building) is very pleased with their quality of work and how quickly they accomplished it. I hope to hire them again for another ptoject in the Spring. Don’t think about it, hire them.”"},{"author":"Celeste Cirillo","source":"Google (1 review)","rating":"5 Stars","text":"“I just used NY Unique Contractors. I give this company a thumbs up. They did my Sidewalk and front area. Mr. T explained all that was to be done. He gave the best price and workmanshop is great. I reccommend them and will use them again. 5 out of 5 stars”"},{"author":"Jessica Rodriguez","source":"Google (local guide, 14 reviews)","rating":"5 Stars","text":"“Tee was very professional, on time, responsive. Great quality work!! I will definitely be using him again in the near future. Super happy with the work.”"},{"author":"Theodore Marshall","source":"Google (4 reviews)","rating":"5 Stars","text":"“Very fast, and effecient. Best rates in Brooklyn. Talk to a lot of people, but Mr. Tee had the experience I needed to get the job done.”"},{"author":"Jean H Pierre-Lys","source":"Google (2 reviews)","rating":"5 Stars","text":"“Honest Contractor I Know ! Good estimates !!”"},{"author":"Bobby Lupo","source":"Google (local guide, 11 reviews)","rating":"5 Stars","text":""},{"author":"Adil Tasawar","source":"Google (3 reviews)","rating":"5 Stars","text":""}]</script>
-    <script>
+    <!-- Testimonials script removed
       (function() {
-        const dataEl = document.getElementById('testimonials-data');
-        // Injected JSON string at build time below
-        const RAW = dataEl.textContent.trim();
-        let ALL = [];
-        try { ALL = RAW ? JSON.parse(RAW) : []; } catch (e) { ALL = []; }
-        // Filter out empty items
-        ALL = ALL.filter(t => (t.text && t.text.trim()) || (t.rating && t.author));
+        // Inline dataset copied from testimonials.md (subset fields)
+        const TESTIMONIALS = [
+          {author:"Mike F.",source:"Yelp",rating:"5 Stars",text:"\"Danny and Tee were recommended to me by Kong's, a masonry shop in Brooklyn. In one week they transformed our 600 sq ft cracked and nasty concrete patio into a bluestone paradise. They were professionals, and stopped to ask our input at each step, from the stone layouts to the concrete ramps to drainage considerations. It was by far the best experience we've had working with contractors in NYC.\""},
+          {author:"Cynthia H.",source:"Yelp",rating:"5 Stars",text:"\"Wonderful job on my backyard! Not only was the work perfect but the advice on design was stunning! The project was placing pavers around a spa tub and the whole backyard that was initially dirt and weeds. The owner of this business advised me on the design best suited and suggested adding surrounding flower beds for both beauty and drainage purposes. The paver trim around the tub was attractive and saved me money. His workers were neat and respectful. I would definitely recommend and certainly use them again for another protect . When recent heavy rains occurred a few days after the project was completed and a few pavers sunk (not an uncommon occurrence and not related to their work), he arrived the next morning to fix them.\""},
+          {author:"Adil T.",source:"Yelp",rating:"5 Stars",text:"\"I hired them to do exterior work, they were very helpful and very understanding, explained details of the work they going to do, they also worked with the tight budget i had and they were very professional and cleaned up very well after the job was done, i will definitely recommend them and i am looking to get more work done in the future.\""},
+          {author:"Kevin K.",source:"Yelp",rating:"5 Stars",text:"\"New York Unique was very responsive and considerate from the start. His proposal was thorough and fairly priced. The crew worked fast, efficient and delivered a great product. I would recommend them to anyone and will call them next time I need help with a project.\""},
+          {author:"Tessa M.",source:"Yelp",rating:"5 Stars",text:"\"I recently used New York Unique for a contacting job at my home in Brooklyn. Having experience with prior contractors, I was pleasantly surprised at the efficiency and quality of work Tee (the owner), his son and his crew offered us. Tee's team has a wide range of proficiencies, including masonry, waterproofing and brick work. Tee explained the work he recommended for each job and gave me options which was extremely valuable and rare. The pricing was very fair and attention to detail was excellent. When I had something I wanted adjusted or explained, Tee was always responsive and came to meet me at the house as quickly as he could. This is a family business and they really care about their work and take pride in the end result. I am glad I found them!!\""},
+          {author:"Pam C.",source:"Angi",rating:"5 Stars",text:"“I wish I could give NY Unique 6 stars! We had about 4 people quote us and they had the most reasonable price and were the only ones who gave us the option of getting brick and granite tiles. They were super professional and worked incredibly quickly - they told us the front steps would be done within a week and they finished in 2 days! They also clearly take pride in their work because the results look amazing. We are already planning to use them again for future projects.”"},
+          {author:"T S",source:"Google",rating:"5 Stars",text:"“As a homeowner of more than 15 years, I've had my share of contractor woes. So when I needed my front yard and sidewalk cemented, I didn't just get bids but I also paid attention to HOW the contractors interacted with me. Spoiler alert: New York Unique Contracting is top notch and I would use their services again in a heartbeat.”"},
+          {author:"Michael Frank",source:"Google",rating:"5 Stars",text:"“I had Danny and Tee come out to completely redo our back yard in ditmas Park brooklyn. Got 5 quotes. These guys were not cheapest nor the most expensive. But they asked all the right questions. They did a great job. We used 600sq ft of Bluestone and it has transformed our yard. They were great to work with.”"}
+        ];
 
-        const perPage = 3;
-        let index = 0;
-        const list = document.getElementById('t-list');
-        const viewport = document.getElementById('t-viewport');
-        const btnPrev = document.getElementById('t-prev');
-        const btnNext = document.getElementById('t-next');
+        // Featured we already display — avoid repeating as secondary
+        const FEATURED_TEXT_START = 'In one week they transformed our 600 sq ft';
+        const secondaryData = TESTIMONIALS.filter(t => !(t.text||'').includes(FEATURED_TEXT_START));
 
-        function formatFooter(t) {
-          const bits = [];
-          if (t.author) bits.push(t.author);
-          if (t.source) bits.push(t.source.replace(/\s*\(.*\)$/,''));
-          if (t.rating && t.rating !== 'N/A' && t.rating !== 'N/A Stars') bits.push(t.rating);
-          return '— ' + bits.filter(Boolean).join(', ');
+        const grid = document.getElementById('sec-grid');
+        const prevBtn = document.getElementById('sec-prev');
+        const nextBtn = document.getElementById('sec-next');
+        let idx = 0; // start index
+
+        function cardHtml(t) {
+          const by = [t.author, t.source].filter(Boolean).join(', ');
+          return `
+            <figure>
+              <blockquote class=\"secondary-quote\">${t.text}</blockquote>
+              <footer>— ${by}</footer>
+            </figure>
+          `;
         }
 
-        function render() {
-          const cards = [];
-          for (let i = 0; i < perPage; i++) {
-            const t = ALL[(index + i) % ALL.length];
-            const text = t.text && t.text.trim() ? t.text : (t.rating ? `${t.rating}` : '');
-            cards.push(`
-              <blockquote class="quote-card">
-                <p>${text}</p>
-                <footer>${formatFooter(t)}</footer>
-              </blockquote>
-            `.trim());
-          }
-          list.innerHTML = cards.join('\n');
-        }
-
-        function swap(direction) {
-          viewport.classList.remove('anim-in-up','anim-in-down','anim-out-up','anim-out-down');
-          viewport.classList.add(direction === 'up' ? 'anim-out-up' : 'anim-out-down');
-          viewport.addEventListener('animationend', function handleOut() {
-            viewport.removeEventListener('animationend', handleOut);
-            // advance index
-            if (direction === 'down') {
-              index = (index + perPage) % ALL.length;
-            } else {
-              index = (index - perPage) % ALL.length;
-              if (index < 0) index = (index + ALL.length) % ALL.length;
-            }
-            render();
-            viewport.classList.remove('anim-out-up','anim-out-down');
-            viewport.classList.add(direction === 'up' ? 'anim-in-up' : 'anim-in-down');
-            viewport.addEventListener('animationend', function handleIn() {
-              viewport.removeEventListener('animationend', handleIn);
-              viewport.classList.remove('anim-in-up','anim-in-down');
-            });
+        function markTruncation() {
+          // Add 'is-truncated' if clamped content overflows
+          const nodes = grid.querySelectorAll('.secondary-quote');
+          nodes.forEach(n => {
+            const over = n.scrollHeight > n.clientHeight + 1;
+            n.classList.toggle('is-truncated', over);
           });
         }
 
-        if (btnPrev && btnNext) {
-          btnPrev.addEventListener('click', () => swap('up'));
-          btnNext.addEventListener('click', () => swap('down'));
+        function renderSecondary() {
+          const a = secondaryData[idx % secondaryData.length];
+          const b = secondaryData[(idx + 1) % secondaryData.length];
+          grid.innerHTML = cardHtml(a) + cardHtml(b);
+          requestAnimationFrame(markTruncation);
         }
 
-        // Initial render
-        render();
+        prevBtn?.addEventListener('click', () => {
+          idx = (idx - 2) % secondaryData.length; if (idx < 0) idx = (idx + secondaryData.length) % secondaryData.length;
+          renderSecondary();
+        });
+        nextBtn?.addEventListener('click', () => {
+          idx = (idx + 2) % secondaryData.length;
+          renderSecondary();
+        });
+
+        renderSecondary();
       })();
-    </script>
+    -->
   </body>
 </html>
