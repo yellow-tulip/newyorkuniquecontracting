@@ -34,13 +34,18 @@ Focus is visual design and client‑side only (no backend).
 - Neutral palette with a subtle red accent for CTAs; body copy is grayscale.
 - Accessibility: respect `prefers-reduced-motion`; strong contrast.
 
-### Navigation & Progress
-- Header/nav is truly fixed across the site (no movement while scrolling).
-- Content starts below the header (JS sets `body { padding-top: <header-height> }` on load/resize/font‑ready).
+### Navigation
+- Header/nav scrolls with the page (not fixed or sticky).
 - No bottom divider on the header; rely on spacing and composition.
-- Horizontal scroll progress bar: 3px accent line anchored to the header’s bottom edge, full‑width, visible on mobile.
-- No background track and no smoothing transition; updates immediately with scroll.
-- In‑page anchors are not used in the nav; links route to separate pages.
+- Links route to separate pages (no in-page anchors).
+
+### Contact Section (Home)
+- Section background uses `var(--color-page)` with no dividers or hairlines.
+- Spacing: extra separation above (`margin-top: 200px`) to stage the section.
+- Header (left-aligned): eyebrow “Get a free estimate”, h2 “Tell us about your project”, subtext “We respond within 1 business day.”
+- Grid: 80/20 split at desktop (`grid-template-columns: 4fr 1fr`); stacks on small screens.
+- Form: left column, no card borders or shadow; max-width ~560px; inputs with clear focus; submit button is squarish and green.
+- Info: right column with phone, address, hours; subdued type, left-aligned; simple “+” markers, accent color on emphasis/hover.
 
 ### Typography Scale (Universal)
 - Root headings
@@ -75,10 +80,9 @@ Focus is visual design and client‑side only (no backend).
 - Assets: `assets/` static files; `assets/inspo/` is reference‑only (do not link in production pages)
 - Styles: `assets/styles/tokens.css`, `assets/styles/base.css`, `assets/styles/components.css`
 
-Key header/progress implementation files:
-- Markup: each page’s `<header class="masthead nav">` plus `<div id="progress-h"><div class="bar"></div></div>` inside the header.
-- CSS: `.masthead` fixed layout and `#progress-h` in `assets/styles/base.css`.
-- JS: inline on each page — sets `--header-offset`, `body` padding‑top, and updates the progress bar width on scroll.
+Key implementation notes:
+- Navigation is shared across pages via the same header markup and base styles.
+- The contact form on the home page includes conditional fields and a lightweight inline script for UX and validation.
 
 ---
 
