@@ -33,6 +33,24 @@ Focus is visual design and client‑side only (no backend).
 - Neutral palette with a subtle red accent for CTAs; body copy is grayscale.
 - Accessibility: respect `prefers-reduced-motion`; strong contrast.
 
+### Typography Scale (Universal)
+- Root headings
+  - `h1` → `--fs-xxl` = `clamp(2.3rem, 5.2vw, 3.6rem)`
+  - `h2` → `--fs-xl` = `clamp(1.625rem, 2.8vw, 2.125rem)`
+  - `h3` → `--fs-lg` = `clamp(1.0625rem, 1.9vw, 1.4375rem)`
+- Body text → `--fs-md` = `1rem` (with body base 17px)
+- Small text (labels, captions) → `--fs-sm` = `0.9rem`
+- Hero h1 uses the same token (`--fs-xxl`) for complete consistency.
+
+### Section Rhythm (Universal)
+- Inside padding for major sections → `--section-pad-y = clamp(3.5rem, 8vw, 6rem)`
+- Gap between consecutive sections → `--section-gap-y = clamp(0.5rem, 2vw, 1rem)`
+- Implementation
+  - Apply `.section` to each major band.
+  - `.section { padding-block: var(--section-pad-y); }`
+  - `.section + .section { margin-top: var(--section-gap-y); padding-top: 0; }`
+  - `.section > :last-child { margin-bottom: 0; }` to avoid trailing paragraph margins inflating gaps.
+
 ---
 
 ## Tech Stack

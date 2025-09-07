@@ -48,4 +48,9 @@
   --radius-1: 4px;
   --radius-2: 8px;
   --shadow-1: 0 2px 8px rgba(0,0,0,0.06);
+
+  /* Section rhythm */
+  --section-pad-y: clamp(3.5rem, 8vw, 6rem);    /* vertical padding inside sections */
+  --section-gap-y: clamp(0.5rem, 2vw, 1rem);    /* default gap between sections (tight) */
+  --section-top-trim: 150px;                    /* reduce top padding for subsequent sections */
 }
