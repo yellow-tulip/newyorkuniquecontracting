@@ -175,8 +175,7 @@
     const revealElements = document.querySelectorAll('[data-animate="reveal"]');
     if (!revealElements.length) return;
 
-    // Pre-seed metrics numbers to avoid flash
-    initMetricsNumbers();
+    // Pre-seed metrics numbers to avoid flash\n    // Disabled per request - initMetricsNumbers();
 
     // Set initial state for reveal elements (micro-settle style without blur/scale)
     revealElements.forEach(el => {
@@ -254,9 +253,9 @@
       easing: 'easeOutCubic',
       complete: () => {
         // Trigger metrics count-up if this is the metrics section
-        if (element.classList.contains('about-metrics')) {
-          animateMetricsCountUp();
-        }
+        // Disabled per request - if (element.classList.contains('about-metrics')) {
+          // Disabled per request - animateMetricsCountUp();
+        // Disabled per request - }
       }
     });
 
@@ -294,33 +293,33 @@
   /**
    * Animate metrics count-up using pre-seeded data
    */
-  function animateMetricsCountUp() {
-    const metrics = document.querySelectorAll('.metric .number');
-    if (!metrics.length) return;
+  // Disabled per request - function animateMetricsCountUp() {
+    // Disabled per request - const metrics = document.querySelectorAll('.metric .number');
+    // Disabled per request - if (!metrics.length) return;
 
-    metrics.forEach(metric => {
-      const target = parseInt(metric.getAttribute('data-target'));
-      const prefix = metric.getAttribute('data-prefix') || '';
-      const suffix = metric.getAttribute('data-suffix') || '';
+    // Disabled per request - metrics.forEach(metric => {
+      // Disabled per request - const target = parseInt(metric.getAttribute('data-target'));
+      // Disabled per request - const prefix = metric.getAttribute('data-prefix') || '';
+      // Disabled per request - const suffix = metric.getAttribute('data-suffix') || '';
       
-      if (!target) return;
+      // Disabled per request - if (!target) return;
 
-      // Animate from 0 to target number using stored data
-      anime({
-        targets: { count: 0 },
-        count: target,
-        duration: 1600,
-        easing: 'easeOutCubic',
-        update: function(anim) {
-          const currentCount = Math.floor(anim.animatables[0].target.count);
-          metric.textContent = prefix + currentCount + suffix;
-        },
-        complete: function() {
-          metric.textContent = prefix + target + suffix; // Ensure final value is exact
-        }
-      });
-    });
-  }
+      // Disabled per request - // Animate from 0 to target number using stored data
+      // Disabled per request - anime({
+        // Disabled per request - targets: { count: 0 },
+        // Disabled per request - count: target,
+        // Disabled per request - duration: 1600,
+        // Disabled per request - easing: 'easeOutCubic',
+        // Disabled per request - update: function(anim) {
+          // Disabled per request - const currentCount = Math.floor(anim.animatables[0].target.count);
+          // Disabled per request - metric.textContent = prefix + currentCount + suffix;
+        // Disabled per request - },
+        // Disabled per request - complete: function() {
+          // Disabled per request - metric.textContent = prefix + target + suffix; // Ensure final value is exact
+        // Disabled per request - }
+      // Disabled per request - });
+    // Disabled per request - });
+  // Disabled per request - }
 
   /**
    * Subtle parallax effects

@@ -189,7 +189,7 @@ a:hover { color: var(--accent); }
 .cta-link { text-decoration: underline; text-underline-offset: 3px; }
 
 /* Intro (inspo 1) above a full-bleed image */
-.intro-block { grid-column: 2; padding-block: var(--space-8) var(--space-6); }
+.intro-block { grid-column: 2; padding-block: var(--space-8) var(--space-6); width: calc(100% + 36px); }
 .full-bleed { grid-column: 1 / -1; width: 100vw; margin-inline: calc(50% - 50vw); }
 
 .info-strip { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: var(--space-4); font-size: var(--fs-sm); padding-block: var(--space-3); }
