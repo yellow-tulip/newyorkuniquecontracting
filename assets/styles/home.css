@@ -94,7 +94,21 @@
 /* Left visual: neutral wireframe placeholder (no inspo asset linking) */
 .about-visual { position: relative; z-index: 0; }
 /* Full-bleed wireframe that aligns to viewport left and sits behind text */
-.about-wireframe { width: calc(100vw - 325px); margin-inline: calc(50% - 50vw); height: clamp(420px, 42vw, 640px); background: repeating-linear-gradient(0deg, #eff2f6 0 1px, transparent 1px 24px), repeating-linear-gradient(90deg, #eff2f6 0 1px, transparent 1px 24px); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); z-index: 0; pointer-events: none; }
+.about-wireframe { 
+  width: calc(100vw - 325px); 
+  margin-inline: calc(50% - 50vw); 
+  height: clamp(420px, 42vw, 640px); 
+  object-fit: cover;
+  z-index: 0; 
+  pointer-events: none; 
+  transform: scale(0.5) translateX(500px);
+  transform-origin: left center;
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -ms-interpolation-mode: bicubic;
+}
 .about-breadcrumb { position: absolute; top: .5rem; left: calc(50% - 50vw + .5rem); font-size: var(--fs-sm); color: var(--color-muted); background: rgba(255,255,255,.7); padding: .25rem .5rem; border-radius: 4px; }
 
 /* Right column typography */
@@ -139,6 +153,14 @@
 .short-left-figure { margin: 0; }
 .short-right-figure { margin: 0 0 1.25rem 0; }
 .img-card { border-radius: 8px; overflow: hidden; border: 1px solid var(--color-border); background: #f6f7f9; }
+.img-card img {
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.img-card:hover img {
+  filter: grayscale(0%);
+}
 
 /* FAQ block */
 .faq { display: grid; gap: 1.125rem; }

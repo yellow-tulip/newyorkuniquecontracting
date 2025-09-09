@@ -25,7 +25,7 @@
 
   /* Type scale (refined, slightly smaller) */
   /* Slightly larger, consistent site-wide */
-  --fs-xxl: clamp(2.3rem, 5.2vw, 3.6rem);
+  --fs-xxl: clamp(2.6rem, 5.5vw, 4.2rem);
   --fs-xl: clamp(1.625rem, 2.8vw, 2.125rem);
   --fs-lg: clamp(1.0625rem, 1.9vw, 1.4375rem);
   --fs-md: 1rem;
@@ -224,7 +224,7 @@ a:hover { color: var(--accent); }
 
 /* Intro copy (hero); align with global h1 token */
 .intro h1 { font-size: var(--fs-xxl); line-height: 1.18; font-weight: var(--font-weight-medium); letter-spacing: -0.01em; margin: 0 0 var(--space-4); max-width: 22ch; }
-.intro p { font-size: var(--fs-md); line-height: 1.7; color: var(--color-muted); margin: 0; max-width: 64ch; }
+.intro p { font-size: var(--fs-md); line-height: 1.7; color: var(--color-muted); margin: 0; max-width: 70ch; }
 /* Additional ratios */
 .ratio-16x9 { aspect-ratio: 16 / 9; }
 
