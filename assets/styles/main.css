@@ -1,9 +1,67 @@
+/* Design Tokens: colors, typography, spacing, radii */
+:root {
+  /* Palette: approachable + premium, Swiss-inspired */
+  --color-bg: #ffffff;
+  --color-page: #fcfcfc; /* subtle off‑white for sections */
+  --color-ink: #111111;  /* primary text */
+  --color-ink-2: #222222; /* headings */
+  --color-muted: #6b6b6b; /* secondary text */
+  --color-border: #e6e6e6; /* hairlines */
+
+  /* Accent (from assets/original.html) */
+  --brand-red-600: #e43b28; /* primary accent */
+  --brand-red-700: #e43b28; /* hover/active */
+  --brand-red-050: #fff2ef; /* light tint */
+  --brand-red-100: #fde7e4; /* section wash */
+
+  --accent: var(--brand-red-600);
+  --accent-hover: var(--brand-red-700);
+
+  /* Typography */
+  --font-sans: "Inter", "Inter Fallback", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Type scale (refined, slightly smaller) */
+  /* Slightly larger, consistent site-wide */
+  --fs-xxl: clamp(2.3rem, 5.2vw, 3.6rem);
+  --fs-xl: clamp(1.625rem, 2.8vw, 2.125rem);
+  --fs-lg: clamp(1.0625rem, 1.9vw, 1.4375rem);
+  --fs-md: 1rem;
+  --fs-sm: 0.9rem;
+
+  /* Spacing – 4px baseline */
+  --space-1: 0.25rem; /* 4 */
+  --space-2: 0.5rem;  /* 8 */
+  --space-3: 0.75rem; /* 12 */
+  --space-4: 1rem;    /* 16 */
+  --space-5: 1.5rem;  /* 24 */
+  --space-6: 2rem;    /* 32 */
+  --space-7: 3rem;    /* 48 */
+  --space-8: 4rem;    /* 64 */
+
+  /* Layout */
+  --container-max: 100%;   /* essentially full-width pages */
+  --container-pad: 1rem; /* slightly increased side padding (~16px) */
+  --measure: 68ch;         /* comfortable reading measure */
+  --radius-1: 4px;
+  --radius-2: 8px;
+  --shadow-1: 0 2px 8px rgba(0,0,0,0.06);
+
+  /* Section rhythm */
+  --section-pad-y: clamp(3.5rem, 8vw, 6rem);    /* vertical padding inside sections */
+  --section-gap-y: clamp(0.5rem, 2vw, 1rem);    /* default gap between sections (tight) */
+  --section-top-trim: 150px;                    /* reduce top padding for subsequent sections */
+}
+
 /* Base styles, reset, layout, typography */
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
   font-family: var(--font-sans);
+  font-synthesis: none; /* Disable synthesis since we have real weights */
   /* Slightly larger base for universal consistency */
   font-size: 17px;
   line-height: 1.55;
@@ -27,8 +85,8 @@ img, svg { display: block; max-width: 100%; height: auto; }
 
 /* Typography */
 h1, h2, h3 { margin: 0 0 var(--space-3); line-height: 1.18; color: var(--color-ink-2); }
-h1 { font-size: var(--fs-xxl); letter-spacing: -0.01em; font-weight: 600; }
-h2 { font-size: var(--fs-xl); letter-spacing: -0.005em; font-weight: 600; }
+h1 { font-size: var(--fs-xxl); letter-spacing: -0.01em; font-weight: var(--font-weight-medium); }
+h2 { font-size: var(--fs-xl); letter-spacing: -0.005em; font-weight: var(--font-weight-medium); }
 h3 { font-size: var(--fs-lg); }
 p { margin: 0 0 var(--space-3); color: var(--color-muted); max-width: var(--measure); font-size: var(--fs-md); }
 
@@ -81,18 +139,10 @@ a:hover { color: var(--accent); }
 .brand sup { font-size: 0.6em; vertical-align: super; }
 .nav-center { grid-column: 2; justify-self: start; display: flex; flex-wrap: wrap; gap: var(--space-5); padding-block: var(--space-5); }
 .nav-right { grid-column: 3; justify-self: end; padding-block: var(--space-5); }
-.nav a { color: var(--color-ink-2); transition: color .18s ease, transform .22s cubic-bezier(.2,.8,.2,1); }
+.nav a { color: var(--color-ink-2); }
 .nav a:hover { color: var(--accent); }
-.nav a.is-pump { animation: pump 220ms cubic-bezier(.2,.8,.2,1) 1; }
-.nav a:active { transform: translateY(1px); }
 .nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
 .cta-link { text-decoration: underline; text-underline-offset: 3px; }
-
-@keyframes pump {
-  0% { transform: translateY(0) scaleY(1); }
-  45% { transform: translateY(2px) scaleY(.985); }
-  100% { transform: translateY(0) scaleY(1); }
-}
 .cta-link { text-decoration: underline; text-underline-offset: 3px; }
 
 /* Intro (inspo 1) above a full-bleed image */
@@ -130,7 +180,7 @@ a:hover { color: var(--accent); }
 }
 
 /* Intro copy (hero); align with global h1 token */
-.intro h1 { font-size: var(--fs-xxl); line-height: 1.18; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 var(--space-4); max-width: 22ch; }
+.intro h1 { font-size: var(--fs-xxl); line-height: 1.18; font-weight: var(--font-weight-medium); letter-spacing: -0.01em; margin: 0 0 var(--space-4); max-width: 22ch; }
 .intro p { font-size: var(--fs-md); line-height: 1.7; color: var(--color-muted); margin: 0; max-width: 64ch; }
 /* Additional ratios */
 .ratio-16x9 { aspect-ratio: 16 / 9; }
@@ -140,4 +190,67 @@ a:hover { color: var(--accent); }
   .nav-center { justify-self: start; }
   .nav-right { justify-self: end; }
   .intro-block { grid-column: 1; }
+}
+
+/* Buttons, tags, simple cards */
+.btn {
+  display: inline-block;
+  font-weight: var(--font-weight-bold);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-1);
+  border: 2px solid transparent;
+  transition: background .2s ease, border-color .2s ease, color .2s ease, transform .06s ease;
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+.btn-ghost { background: transparent; color: var(--color-ink-2); border-color: var(--color-border); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.swatch {
+  width: 100%; height: 72px; border-radius: var(--radius-1); border: 1px solid var(--color-border);
+}
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  background: #fff;
+  padding: var(--space-6);
+  box-shadow: var(--shadow-1);
+}
+
+/* Inter font family - real weights to prevent synthesis artifacts */
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-v13-latin-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-v13-latin-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-v13-latin-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Metrics-compatible fallback to prevent layout shift when Inter loads */
+@font-face {
+  font-family: "Inter Fallback";
+  src: local("Arial");
+  ascent-override: 90%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  size-adjust: 107%;
 }
