@@ -34,16 +34,5 @@
         <p class="measure">Content coming soon.</p>
       </section>
     </main>
-    <script>
-      (function(){
-        const links = document.querySelectorAll('.nav a');
-        links.forEach(a=>{
-          a.addEventListener('click', ()=>{
-            a.classList.add('is-pump');
-            a.addEventListener('animationend', ()=> a.classList.remove('is-pump'), {once:true});
-          });
-        });
-      })();
-    </script>
   </body>
  </html>

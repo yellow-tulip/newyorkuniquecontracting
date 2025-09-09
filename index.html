@@ -260,19 +260,6 @@
       </div>
     </footer>
     <script>
-      // Nav pump micro-interaction
-      (function(){
-        const links = document.querySelectorAll('.nav a');
-        links.forEach(a=>{
-          a.addEventListener('click', ()=>{
-            a.classList.add('is-pump');
-            a.addEventListener('animationend', ()=> a.classList.remove('is-pump'), {once:true});
-          });
-        });
-      })();
-
-      // (removed fixed header offset + progress bar)
-
       // Accordion: all closed by default; open one closes others; smooth transitions
       (function(){
         const root = document.getElementById('faq-vision');
@@ -306,67 +293,6 @@
         });
       })();
     </script>
-    <!-- Testimonials script removed
-      (function() {
-        // Inline dataset copied from testimonials.md (subset fields)
-        const TESTIMONIALS = [
-          {author:"Mike F.",source:"Yelp",rating:"5 Stars",text:"\"Danny and Tee were recommended to me by Kong's, a masonry shop in Brooklyn. In one week they transformed our 600 sq ft cracked and nasty concrete patio into a bluestone paradise. They were professionals, and stopped to ask our input at each step, from the stone layouts to the concrete ramps to drainage considerations. It was by far the best experience we've had working with contractors in NYC.\""},
-          {author:"Cynthia H.",source:"Yelp",rating:"5 Stars",text:"\"Wonderful job on my backyard! Not only was the work perfect but the advice on design was stunning! The project was placing pavers around a spa tub and the whole backyard that was initially dirt and weeds. The owner of this business advised me on the design best suited and suggested adding surrounding flower beds for both beauty and drainage purposes. The paver trim around the tub was attractive and saved me money. His workers were neat and respectful. I would definitely recommend and certainly use them again for another protect . When recent heavy rains occurred a few days after the project was completed and a few pavers sunk (not an uncommon occurrence and not related to their work), he arrived the next morning to fix them.\""},
-          {author:"Adil T.",source:"Yelp",rating:"5 Stars",text:"\"I hired them to do exterior work, they were very helpful and very understanding, explained details of the work they going to do, they also worked with the tight budget i had and they were very professional and cleaned up very well after the job was done, i will definitely recommend them and i am looking to get more work done in the future.\""},
-          {author:"Kevin K.",source:"Yelp",rating:"5 Stars",text:"\"New York Unique was very responsive and considerate from the start. His proposal was thorough and fairly priced. The crew worked fast, efficient and delivered a great product. I would recommend them to anyone and will call them next time I need help with a project.\""},
-          {author:"Tessa M.",source:"Yelp",rating:"5 Stars",text:"\"I recently used New York Unique for a contacting job at my home in Brooklyn. Having experience with prior contractors, I was pleasantly surprised at the efficiency and quality of work Tee (the owner), his son and his crew offered us. Tee's team has a wide range of proficiencies, including masonry, waterproofing and brick work. Tee explained the work he recommended for each job and gave me options which was extremely valuable and rare. The pricing was very fair and attention to detail was excellent. When I had something I wanted adjusted or explained, Tee was always responsive and came to meet me at the house as quickly as he could. This is a family business and they really care about their work and take pride in the end result. I am glad I found them!!\""},
-          {author:"Pam C.",source:"Angi",rating:"5 Stars",text:"“I wish I could give NY Unique 6 stars! We had about 4 people quote us and they had the most reasonable price and were the only ones who gave us the option of getting brick and granite tiles. They were super professional and worked incredibly quickly - they told us the front steps would be done within a week and they finished in 2 days! They also clearly take pride in their work because the results look amazing. We are already planning to use them again for future projects.”"},
-          {author:"T S",source:"Google",rating:"5 Stars",text:"“As a homeowner of more than 15 years, I've had my share of contractor woes. So when I needed my front yard and sidewalk cemented, I didn't just get bids but I also paid attention to HOW the contractors interacted with me. Spoiler alert: New York Unique Contracting is top notch and I would use their services again in a heartbeat.”"},
-          {author:"Michael Frank",source:"Google",rating:"5 Stars",text:"“I had Danny and Tee come out to completely redo our back yard in ditmas Park brooklyn. Got 5 quotes. These guys were not cheapest nor the most expensive. But they asked all the right questions. They did a great job. We used 600sq ft of Bluestone and it has transformed our yard. They were great to work with.”"}
-        ];
-
-        // Featured we already display — avoid repeating as secondary
-        const FEATURED_TEXT_START = 'In one week they transformed our 600 sq ft';
-        const secondaryData = TESTIMONIALS.filter(t => !(t.text||'').includes(FEATURED_TEXT_START));
-
-        const grid = document.getElementById('sec-grid');
-        const prevBtn = document.getElementById('sec-prev');
-        const nextBtn = document.getElementById('sec-next');
-        let idx = 0; // start index
-
-        function cardHtml(t) {
-          const by = [t.author, t.source].filter(Boolean).join(', ');
-          return `
-            <figure>
-              <blockquote class=\"secondary-quote\">${t.text}</blockquote>
-              <footer>— ${by}</footer>
-            </figure>
-          `;
-        }
-
-        function markTruncation() {
-          // Add 'is-truncated' if clamped content overflows
-          const nodes = grid.querySelectorAll('.secondary-quote');
-          nodes.forEach(n => {
-            const over = n.scrollHeight > n.clientHeight + 1;
-            n.classList.toggle('is-truncated', over);
-          });
-        }
-
-        function renderSecondary() {
-          const a = secondaryData[idx % secondaryData.length];
-          const b = secondaryData[(idx + 1) % secondaryData.length];
-          grid.innerHTML = cardHtml(a) + cardHtml(b);
-          requestAnimationFrame(markTruncation);
-        }
-
-        prevBtn?.addEventListener('click', () => {
-          idx = (idx - 2) % secondaryData.length; if (idx < 0) idx = (idx + secondaryData.length) % secondaryData.length;
-          renderSecondary();
-        });
-        nextBtn?.addEventListener('click', () => {
-          idx = (idx + 2) % secondaryData.length;
-          renderSecondary();
-        });
-
-        renderSecondary();
-      })();
-    -->
     <script>
       // Contact form: conditional fields + lightweight submit state
       (function(){
