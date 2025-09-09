@@ -232,15 +232,58 @@
     // Check for reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
+    // Special handling for about-metrics section - make main text appear immediately
+    if (element.classList.contains('about-metrics')) {
+      // Make the main text (about-lead and about-caption) visible immediately
+      const aboutText = element.querySelector('.about-text');
+      if (aboutText) {
+        const leadText = aboutText.querySelector('.about-lead');
+        const captionText = aboutText.querySelector('.about-caption');
+        
+        if (leadText) {
+          leadText.style.opacity = '1';
+          leadText.style.transform = 'translateY(0)';
+        }
+        
+        if (captionText) {
+          captionText.style.opacity = '1';
+          captionText.style.transform = 'translateY(0)';
+        }
+      }
+      
+      // But still animate the grid items with stagger effect
+      const staggerElements = element.querySelectorAll('.metric, .faq-item, .form-group, .detail');
+      if (staggerElements.length && !prefersReducedMotion) {
+        // Set initial state for stagger elements
+        staggerElements.forEach(el => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(4px)';
+        });
+        
+        anime({
+          targets: staggerElements,
+          opacity: [0, 1],
+          translateY: [4, 0],
+          duration: 360,
+          delay: anime.stagger(60, {start: 120}),
+          easing: 'easeOutCubic'
+        });
+      } else if (prefersReducedMotion) {
+        // For reduced motion, just make everything visible
+        staggerElements.forEach(el => {
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        });
+      }
+      
+      return;
+    }
+    
     if (prefersReducedMotion) {
       // Instant reveal for reduced motion users
       element.style.opacity = '1';
       element.style.transform = 'translateY(0)';
       
-      if (element.classList.contains('about-metrics')) {
-        // Set metrics to final values instantly
-        setMetricsToFinalValues();
-      }
       return;
     }
 
@@ -250,13 +293,7 @@
       opacity: [0, 1],
       translateY: [8, 0],
       duration: 480,
-      easing: 'easeOutCubic',
-      complete: () => {
-        // Trigger metrics count-up if this is the metrics section
-        // Disabled per request - if (element.classList.contains('about-metrics')) {
-          // Disabled per request - animateMetricsCountUp();
-        // Disabled per request - }
-      }
+      easing: 'easeOutCubic'
     });
 
     // Stagger child elements with micro-settle (no scale)
