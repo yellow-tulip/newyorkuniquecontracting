@@ -8,6 +8,59 @@
 /* Ensure the first line fits on one line */
 .intro h1 { max-width: 30ch; }
 
+/* Apple-esque gradient text effect for "Unique" */
+.accent-word {
+  /* Focal point (percentages of element) and drift angle */
+  --mx: 50%;
+  --my: 50%;
+  --angle: 0deg;
+  --intensity: 0.85;
+  
+  /* Default fallback color for safety */
+  color: #ff6b6b;
+  
+  background-image:
+    radial-gradient(120% 180% at var(--mx) var(--my),
+      #ffb347 0%,
+      #ff6b6b 35%,
+      #d63031 60%,
+      transparent 85%),
+    conic-gradient(from var(--angle) at var(--mx) var(--my),
+      #ff7675, #fd79a8, #fdcb6e, #e17055, #ff6b6b, #fab1a0, #ff7675);
+  
+  background-size: 300% 300%;
+  background-position: center;
+}
+
+/* Apply gradient clip only in supporting browsers */
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .accent-word {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+/* Fallback for browsers without background-clip: text support */
+.accent-word.no-clip {
+  background-image: none;
+  color: #ff6b6b;
+  -webkit-text-fill-color: inherit;
+}
+
+/* Reduced motion fallback - static but visible */
+.accent-word.static {
+  --mx: 50%;
+  --my: 50%;
+  --angle: 45deg;
+}
+
+/* Ensure parent positioning for interactions */
+.intro {
+  position: relative;
+}
+
 /* Thin, monospaced marquee banner */
 .ticker { grid-column: 1 / -1; width: 100vw; margin-inline: calc(50% - 50vw); overflow: hidden; background: var(--color-page); border-block: 1px solid var(--color-border); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 .ticker__viewport { position: relative; white-space: nowrap; }
@@ -43,7 +96,19 @@
 
 .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.75rem, 3.5vw, 2.5rem) clamp(1.5rem, 2.75vw, 2.5rem); margin-top: clamp(1.5rem, 3vw, 2.25rem); justify-items: start; }
 .metric { display: grid; align-content: start; gap: .5rem; }
-.metric .number { font-size: clamp(2.75rem, 5.5vw, 4rem); line-height: 1; font-weight: var(--font-weight-medium); color: var(--color-ink-2); letter-spacing: -0.01em; }
+.metric .number { 
+  font-size: clamp(2.75rem, 5.5vw, 4rem); 
+  line-height: 1; 
+  font-weight: var(--font-weight-medium); 
+  color: var(--color-ink-2); 
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+  cursor: pointer;
+}
+
+.metric .number:hover {
+  color: var(--accent);
+}
 .metric .prefix { font-size: .36em; vertical-align: baseline; margin-right: .25em; color: var(--color-muted); }
 .metric .suffix { font-size: .34em; vertical-align: super; letter-spacing: .01em; color: var(--color-muted); }
 .metric .label { font-size: var(--fs-sm); color: var(--color-muted); }

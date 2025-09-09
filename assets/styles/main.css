@@ -18,7 +18,7 @@
   --accent-hover: var(--brand-red-700);
 
   /* Typography */
-  --font-sans: "Inter", "Inter Fallback", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: "Inter Fallback", "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-bold: 700;
@@ -139,8 +139,51 @@ a:hover { color: var(--accent); }
 .brand sup { font-size: 0.6em; vertical-align: super; }
 .nav-center { grid-column: 2; justify-self: start; display: flex; flex-wrap: wrap; gap: var(--space-5); padding-block: var(--space-5); }
 .nav-right { grid-column: 3; justify-self: end; padding-block: var(--space-5); }
-.nav a { color: var(--color-ink-2); }
-.nav a:hover { color: var(--accent); }
+.nav a { 
+  color: var(--color-ink-2); 
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+/* Warm gradient hover effect for nav links */
+.nav a:hover {
+  --mx: 50%;
+  --my: 50%;
+  --angle: 45deg;
+  
+  background-image:
+    radial-gradient(120% 180% at var(--mx) var(--my),
+      #ffb347 0%,
+      #ff6b6b 35%,
+      #d63031 60%,
+      transparent 85%),
+    conic-gradient(from var(--angle) at var(--mx) var(--my),
+      #ff7675, #fd79a8, #fdcb6e, #e17055, #ff6b6b, #fab1a0, #ff7675);
+  
+  background-size: 200% 200%;
+  background-position: center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Fallback for browsers without background-clip support */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .nav a:hover {
+    background-image: none;
+    color: var(--accent);
+    -webkit-text-fill-color: inherit;
+  }
+}
+
+/* Click push-down animation */
+.nav a:active {
+  transform: translateY(2px);
+  transition: transform 0.1s ease;
+}
+
 .nav a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
 .cta-link { text-decoration: underline; text-underline-offset: 3px; }
 .cta-link { text-decoration: underline; text-underline-offset: 3px; }
@@ -226,7 +269,7 @@ a:hover { color: var(--accent); }
   src: url("../fonts/inter-v13-latin-regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
+  font-display: optional; /* No switching, brief invisible period */
 }
 
 @font-face {
@@ -234,16 +277,10 @@ a:hover { color: var(--accent); }
   src: url("../fonts/inter-v13-latin-500.woff2") format("woff2");
   font-weight: 500;
   font-style: normal;
-  font-display: swap;
+  font-display: optional; /* No switching, brief invisible period */
 }
 
-@font-face {
-  font-family: "Inter";
-  src: url("../fonts/inter-v13-latin-700.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
+/* Removed 700 weight to reduce loading overhead - use font-synthesis when needed */
 
 /* Metrics-compatible fallback to prevent layout shift when Inter loads */
 @font-face {

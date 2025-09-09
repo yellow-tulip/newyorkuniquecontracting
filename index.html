@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Home — NY Unique Contracting</title>
     <meta name="description" content="Masonry and concrete done right. Clear, precise, and dependable." />
+    
+    <!-- CRITICAL: Preload fonts before CSS -->
+    <link rel="preload" href="assets/fonts/inter-v13-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/inter-v13-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+    
     <!-- CSS files -->
     <link rel="stylesheet" href="assets/styles/main.css">
     <link rel="stylesheet" href="assets/styles/home.css">
-    <!-- Inline fallback to prevent blank first paint -->
+    <!-- Updated fallback with consistent font stack -->
     <style>
       html { color-scheme: light; }
-      body { margin: 0; font-family: "Inter Fallback", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      body { 
+        margin: 0; 
+        font-family: "Inter Fallback", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+      }
     </style>
   </head>
   <body>
@@ -35,7 +43,7 @@
         <section class="intro-block">
           <aside class="intro">
             <h1>
-              <span class="brand-phrase">New York Unique Contracting</span><br>
+              <span class="brand-phrase">New York <span class="accent-word">Unique</span> Contracting</span><br>
               <span class="nowrap">is your neighborhood</span><br>
               <span class="nowrap">general contractor.</span>
             </h1>
@@ -67,7 +75,7 @@
       <!-- Removed styleguide and sample sections per direction -->
 
       <!-- About + metrics (inspiration: assets/inspo/homeabout.png) -->
-      <section class="section about-metrics container" aria-label="About NY Unique Contracting">
+      <section class="section about-metrics container" data-animate="reveal" aria-label="About NY Unique Contracting">
         <div class="about-grid">
           <!-- Left: illustrative wireframe placeholder; replace with production image when ready -->
           <div class="about-visual" aria-hidden="true">
@@ -104,7 +112,7 @@
       </section>
 
       <!-- Short two-column section (inspired by assets/short.png) -->
-      <section class="section short-section container" aria-labelledby="vision-title">
+      <section class="section short-section container" data-animate="reveal" aria-labelledby="vision-title">
         <div class="short-grid">
           <div class="short-left">
             <h2 id="vision-title">Vision Forge</h2>
@@ -152,7 +160,7 @@
       </section>
 
       <!-- Contact / Get a Quote -->
-      <section class="section contact-section container" aria-label="Get in touch">
+      <section class="section contact-section container" data-animate="reveal" aria-label="Get in touch">
         <div class="contact-grid">
           <header class="contact-head">
             <div class="eyebrow">Get a free estimate</div>
@@ -333,5 +341,9 @@
         });
       })();
     </script>
+    
+    <!-- Anime.js for microinteractions -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script src="assets/animations.js"></script>
   </body>
 </html>
