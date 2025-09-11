@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bento Hero Draft — NY Unique Contracting</title>
+    <meta name="description" content="Draft of a bento-style hero section with segmented CTAs." />
+
+    <!-- Fonts (preload to match site rhythm) -->
+    <link rel="preload" href="assets/fonts/inter-v13-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="assets/fonts/inter-v13-latin-500.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="assets/styles/main.css">
+    <link rel="stylesheet" href="assets/styles/home.css">
+    <link rel="stylesheet" href="assets/styles/bento.css">
+    <style>
+      html { color-scheme: light; }
+      body { margin: 0; font-family: "Inter Fallback", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    </style>
+  </head>
+  <body data-page="bento">
+    <main>
+      <div class="grid-shell container">
+        <!-- Full-bleed Quad Slices Hero (draft) -->
+        <section class="quad-hero full-bleed" aria-label="Explore your path">
+          <!-- Minimal, sticky hamburger only (no logo or CTA) -->
+          <button class="hamburger" id="heroMenuBtn" aria-label="Open menu" aria-controls="overlayMenu" aria-expanded="false">
+            <span class="hamburger__bar"></span>
+            <span class="hamburger__bar"></span>
+            <span class="hamburger__bar"></span>
+          </button>
+          <!-- Four equal slices (labels always visible, centered) -->
+          <div class="quad-hero__slices" role="list">
+            <a class="slice" role="listitem" href="about.html" aria-label="About">
+              <span class="slice__label">About</span>
+              <picture class="slice__media">
+                <img src="assets/images/about.jpg" alt="About our company" width="1600" height="900" />
+              </picture>
+            </a>
+
+            <a class="slice" role="listitem" href="services.html" aria-label="Process">
+              <span class="slice__label">Process</span>
+              <picture class="slice__media">
+                <img src="assets/images/process.jpg" alt="Our process" width="1600" height="900" />
+              </picture>
+            </a>
+
+            <a class="slice" role="listitem" href="portfolio.html" aria-label="Portfolio">
+              <span class="slice__label">Portfolio</span>
+              <picture class="slice__media">
+                <img src="assets/images/forge.jpg" alt="Portfolio preview" width="1600" height="900" />
+              </picture>
+            </a>
+
+            <a class="slice" role="listitem" href="contact.html" aria-label="Contact">
+              <span class="slice__label">Contact</span>
+              <picture class="slice__media">
+                <img src="assets/images/forge2.jpg" alt="Contact us" width="1600" height="900" />
+              </picture>
+            </a>
+          </div>
+        </section>
+
+        <!-- Thin monospaced marquee banner (unchanged structure/styles) -->
+        <div class="ticker" aria-label="Company info banner">
+          <div class="ticker__viewport">
+            <div class="ticker__track">
+              <div class="ticker__content" aria-hidden="true">
+                <span>NEW YORK UNIQUE CONTRACTING EST. 2005 - LICENSED &amp; INSURED - (718) 338-3413</span>
+                <span>HOURS MON–SAT 7AM–7PM · SUN CLOSED</span>
+              </div>
+              <div class="ticker__content" aria-hidden="true">
+                <span>NEW YORK UNIQUE CONTRACTING EST. 2005 - LICENSED &amp; INSURED - (718) 338-3413</span>
+                <span>HOURS MON–SAT 7AM–7PM · SUN CLOSED</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- About + Metrics from homepage with original SVG overlay (first iteration) -->
+      <section class="section about-metrics container circuit-enabled" aria-label="About NY Unique Contracting">
+          <!-- Original full-bleed SVG overlay placed before content -->
+          <svg class="metrics-circuit" aria-hidden="true" viewBox="0 0 1200 600" preserveAspectRatio="none">
+            <!-- Desktop path (visible ≥900px) -->
+            <path id="metrics-circuit-desktop" class="circuit-path circuit-desktop" d="
+              M 0 120
+              C 160 120, 220 120, 260 180
+              S 360 260, 420 240
+              C 520 210, 560 200, 610 250
+              S 700 320, 770 300
+              C 860 270, 900 250, 960 300
+              S 1060 360, 1200 340
+            "/>
+            <!-- Mobile path (visible <900px) -->
+            <path id="metrics-circuit-mobile" class="circuit-path circuit-mobile" d="
+              M 0 80
+              C 140 90, 220 140, 260 200
+              S 340 300, 420 280
+              C 520 260, 620 280, 720 320
+              S 940 360, 1200 340
+            "/>
+          </svg>
+          <div class="about-grid">
+            <!-- Left: illustrative wireframe placeholder; replace with production image when ready -->
+            <div class="about-visual" aria-hidden="true">
+              <span class="about-breadcrumb">/About us</span>
+            </div>
+
+            <!-- Right: lead statement + 2x2 stats + mission line -->
+            <div class="about-text">
+              <p class="about-lead">At New York Unique, <span class="accent">we believe that</span> great <span class="accent">construction</span> is more than just bricks and mortar — it’s about creating spaces that inspire, endure, and transform lives.</p>
+
+              <dl class="metrics">
+                <div class="metric">
+                  <dt class="number">100<span class="suffix">%</span></dt>
+                  <dd class="label">Family Owned & Operated</dd>
+                </div>
+                <div class="metric">
+                  <dt class="number">500<span class="suffix">+</span></dt>
+                  <dd class="label">Homes Transformed</dd>
+                </div>
+                <div class="metric">
+                  <dt class="number">20<span class="suffix">+</span></dt>
+                  <dd class="label">Years of Experience</dd>
+          
+                </div>
+                <div class="metric">
+                  <dt class="number">5<span class="suffix">★</span></dt>
+                  <dd class="label">Community Rating</dd>
+                </div>
+              </dl>
+
+              <p class="about-caption">Our Mission is to deliver future-ready infrastructure that combines aesthetic brilliance with functional resilience.</p>
+            </div>
+          </div>
+        </section>
+        
+        <!-- Vision Forge section from homepage -->
+        <section class="section short-section container" aria-labelledby="vision-title">
+          <div class="short-grid">
+            <div class="short-left">
+              <h2 id="vision-title">Vision Forge</h2>
+              <p class="short-intro">Where dreams take shape, creating unforgettable architecture. Vendors with expert craftsmanship and precision execution, transforming inspiration into magnificent, enduring structures.</p>
+              <figure class="short-left-figure img-card ratio-4x5">
+                <img src="assets/images/forge.jpg" class="cover" alt="Stone masonry work" loading="lazy">
+              </figure>
+            </div>
+            <div class="short-right">
+              <figure class="short-right-figure img-card ratio-3x2">
+                <img src="assets/images/forge2.jpg" class="cover" alt="Stone masonry work" loading="lazy">
+              </figure>
+
+              <div class="faq" id="faq-vision">
+                <div class="faq-item">
+                  <button class="faq-q" id="q1" aria-controls="a1" aria-expanded="false">
+                    <span>What types of construction projects does your company specialize in?</span>
+                    <span class="faq-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="faq-a" id="a1" role="region" aria-labelledby="q1">
+                    <p>The types of construction projects our company specializes in include residential, commercial, industrial, and renovation projects—tailored to your property’s needs.</p>
+                  </div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-q" id="q2" aria-controls="a2" aria-expanded="false">
+                    <span>Construction projects our area of interest?</span>
+                    <span class="faq-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="faq-a" id="a2" role="region" aria-labelledby="q2">
+                    <p>We focus on concrete and masonry, patios and walkways, bluestone and pavers, and exterior repair from waterproofing to pointing.</p>
+                  </div>
+                </div>
+                <div class="faq-item">
+                  <button class="faq-q" id="q3" aria-controls="a3" aria-expanded="false">
+                    <span>Competitors in terms of quality and efficiency?</span>
+                    <span class="faq-icon" aria-hidden="true">+</span>
+                  </button>
+                  <div class="faq-a" id="a3" role="region" aria-labelledby="q3">
+                    <p>We compete on craftsmanship, responsiveness, and clean delivery, balancing speed with durability for long‑lasting results.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+    </main>
+    <div class="overlay-menu" id="overlayMenu" aria-hidden="true">
+      <button class="overlay-close" aria-label="Close menu">×</button>
+      <nav class="overlay-nav" aria-label="Primary">
+        <a href="about.html">About</a>
+        <a href="services.html">Process</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+    <script>
+      (function(){
+        const btn = document.getElementById('heroMenuBtn');
+        const menu = document.getElementById('overlayMenu');
+        const closeBtn = document.querySelector('.overlay-close');
+        if(!btn || !menu) return;
+        function openMenu(){
+          btn.setAttribute('aria-expanded', 'true');
+          menu.setAttribute('aria-hidden', 'false');
+          menu.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+          (closeBtn||menu).focus?.();
+        }
+        function closeMenu(){
+          btn.setAttribute('aria-expanded', 'false');
+          menu.setAttribute('aria-hidden', 'true');
+          menu.classList.remove('is-open');
+          document.body.style.overflow = '';
+          btn.focus();
+        }
+        function toggle(){
+          const open = btn.getAttribute('aria-expanded') === 'true';
+          open ? closeMenu() : openMenu();
+        }
+        btn.addEventListener('click', toggle);
+        closeBtn?.addEventListener('click', closeMenu);
+        menu.addEventListener('click', (e)=>{
+          if(e.target === menu) closeMenu();
+        });
+        window.addEventListener('keydown', (e)=>{
+          if(e.key === 'Escape' && menu.classList.contains('is-open')){ closeMenu(); }
+        });
+      })();
+    </script>
+    <script>
+      // Accordion behavior for Vision Forge FAQ
+      (function(){
+        const root = document.getElementById('faq-vision');
+        if (!root) return;
+        const items = Array.from(root.querySelectorAll('.faq-item'));
+        function setState(item, open){
+          const btn = item.querySelector('.faq-q');
+          const panel = item.querySelector('.faq-a');
+          const icon = item.querySelector('.faq-icon');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          icon.textContent = open ? '−' : '+';
+          if (open) {
+            panel.style.maxHeight = panel.scrollHeight + 'px';
+            panel.style.opacity = '1';
+            panel.style.marginTop = '14px';
+          } else {
+            panel.style.maxHeight = '0px';
+            panel.style.opacity = '0';
+            panel.style.marginTop = '0px';
+          }
+        }
+        function closeAll(){ items.forEach(i => setState(i, false)); }
+        items.forEach(item => {
+          const btn = item.querySelector('.faq-q');
+          btn.addEventListener('click', () => {
+            const isOpen = btn.getAttribute('aria-expanded') === 'true';
+            if (isOpen) { setState(item, false); }
+            else { closeAll(); setState(item, true); }
+          });
+        });
+      })();
+    </script>
+    <!-- Disable dynamic circuit script by removing its target class -->
+    <script>
+      (function(){
+        const s = document.querySelector('.about-metrics.circuit-enabled');
+        if (s) { s.classList.remove('circuit-enabled'); s.classList.add('circuit-original'); }
+      })();
+    </script>
+    <!-- Anime.js for circuit draw -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script>
+      // Dynamic "pinball" circuit: builds a path that visits each metric in order
+      (function(){
+        const section = document.querySelector('.about-metrics.circuit-enabled');
+        if (!section) return;
+        const svg = section.querySelector('.metrics-circuit');
+        const desktopPath = section.querySelector('#metrics-circuit-desktop');
+        const mobilePath = section.querySelector('#metrics-circuit-mobile');
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Build an industrial, geometric "Manhattan" path with 90° elbows
+        function manhattanPath(points){
+          if (!points || points.length < 2) return '';
+          let d = `M ${Math.round(points[0].x)} ${Math.round(points[0].y)}`;
+          for (let i = 1; i < points.length; i++) {
+            const p1 = points[i-1];
+            const p2 = points[i];
+            if (p1.x === p2.x || p1.y === p2.y) {
+              // Already axis-aligned
+              d += ` L ${Math.round(p2.x)} ${Math.round(p2.y)}`;
+            } else {
+              // Create an elbow: first horizontal, then vertical
+              const mid = { x: p2.x, y: p1.y };
+              d += ` L ${Math.round(mid.x)} ${Math.round(mid.y)} L ${Math.round(p2.x)} ${Math.round(p2.y)}`;
+            }
+          }
+          return d;
+        }
+
+        function buildPoints(){
+          const rect = section.getBoundingClientRect();
+          const toLocal = (x, y) => ({ x: x - rect.left, y: y - rect.top });
+          const aboutLead = section.querySelector('.about-lead');
+          const metrics = Array.from(section.querySelectorAll('.metrics .metric'));
+          const caption = section.querySelector('.about-caption');
+          const grid = section.querySelector('.about-grid');
+          const textCol = section.querySelector('.about-text');
+          const visualCol = section.querySelector('.about-visual');
+
+          if (!aboutLead || metrics.length === 0 || !caption || !svg || !grid || !textCol) return null;
+
+          const leadRect = aboutLead.getBoundingClientRect();
+          const gridRect = grid.getBoundingClientRect();
+          const textRect = textCol.getBoundingClientRect();
+          const capRect = caption.getBoundingClientRect();
+          const visualRect = visualCol ? visualCol.getBoundingClientRect() : null;
+
+          // Start just under the section top-left (below ticker)
+          const start = toLocal(rect.left + 8, rect.top + 46);
+
+          // Guide points to deliberately fill the left column negative space
+          let leftPts = [];
+          if (visualRect) {
+            leftPts = [
+              // upper-left sweep
+              toLocal(visualRect.left + visualRect.width * 0.35, visualRect.top + visualRect.height * 0.20),
+              // mid-left dip
+              toLocal(visualRect.left + visualRect.width * 0.15, visualRect.top + visualRect.height * 0.55),
+              // lower-left rise toward right column
+              toLocal(visualRect.left + visualRect.width * 0.48, visualRect.bottom - 24)
+            ];
+          } else {
+            // fallback: a couple of points near the left edge of the section
+            leftPts = [
+              toLocal(rect.left + 80, rect.top + 120),
+              toLocal(rect.left + 120, rect.top + 260)
+            ];
+          }
+
+          // Metric rects and centers
+          const numberRects = metrics.map((m)=> (m.querySelector('.number')||m).getBoundingClientRect());
+          const centers = numberRects.map(r => ({ x: r.left + r.width/2, y: r.top + r.height/2 }));
+
+          // Build horizontal lanes to avoid overlapping numbers
+          const topRowTop = Math.min(numberRects[0].top, numberRects[1].top);
+          const topRowBottom = Math.max(numberRects[0].bottom, numberRects[1].bottom);
+          const bottomRowTop = Math.min(numberRects[2].top, numberRects[3].top);
+          const bottomRowBottom = Math.max(numberRects[2].bottom, numberRects[3].bottom);
+
+          const lanePad = 12; // vertical spacing around rows
+          const topLaneY = topRowTop - lanePad;
+          const midLaneY = (topRowBottom + bottomRowTop) / 2;
+          const bottomLaneY = bottomRowBottom + lanePad;
+
+          // Vertical lanes: clear left and right of number blocks
+          const leftBlockLeft = Math.min(numberRects[0].left, numberRects[2].left);
+          const leftLaneX = leftBlockLeft - 22;
+          const rightBlockRight = Math.max(numberRects[1].right, numberRects[3].right);
+          const rightLaneX = rightBlockRight + 22;
+
+          // Transition points and lane elbows for geometric routing
+          const elbows = [
+            // Approach top row along top lane from left to right
+            toLocal(leftLaneX, topLaneY),
+            toLocal(rightLaneX, topLaneY),
+            // Drop to mid lane and traverse right -> left (toward BL)
+            toLocal(rightLaneX, midLaneY),
+            toLocal(leftLaneX, midLaneY),
+            // Drop to bottom lane and traverse left -> right (toward BR)
+            toLocal(leftLaneX, bottomLaneY),
+            toLocal(rightLaneX, bottomLaneY)
+          ];
+
+          // Transition point below metrics to move toward caption
+          const gp3 = toLocal(textRect.left + textRect.width * 0.78, gridRect.bottom + 10);
+
+          // End near the caption baseline toward the right edge
+          const end = toLocal(rect.right - 12, capRect.bottom + 8);
+
+          // Combine all points
+          const pts = [start, ...leftPts, ...elbows, gp3, end];
+          // Milestone targets use number centers; path frames them via lanes
+          const metricTargets = centers.map(c => toLocal(c.x, c.y));
+          return { pts, metricTargets };
+        }
+
+        function prepAndAnimate(){
+          const mq = window.matchMedia('(max-width: 900px)');
+          const activePath = mq.matches ? mobilePath : desktopPath;
+          if (!activePath) return;
+
+          // Match SVG viewBox to section size for direct pixel mapping
+          const rect = section.getBoundingClientRect();
+          svg.setAttribute('viewBox', `0 0 ${Math.round(rect.width)} ${Math.round(rect.height)}`);
+
+          const built = buildPoints();
+          if (!built) return;
+          const { pts, metricTargets } = built;
+          const d = manhattanPath(pts);
+          activePath.setAttribute('d', d);
+
+          const totalLen = activePath.getTotalLength();
+          activePath.style.strokeDasharray = String(totalLen);
+          activePath.style.strokeDashoffset = String(totalLen);
+
+          // Precise milestones along the actual path length
+          function lengthAtPoint(target, samples = 600){
+            let bestL = 0; let bestD = Infinity;
+            const step = totalLen / samples;
+            for (let L = 0; L <= totalLen; L += step) {
+              const pt = activePath.getPointAtLength(L);
+              const d = Math.hypot(pt.x - target.x, pt.y - target.y);
+              if (d < bestD) { bestD = d; bestL = L; }
+            }
+            return bestL;
+          }
+          const milestones = metricTargets.map(mt => lengthAtPoint(mt));
+
+          const metrics = Array.from(section.querySelectorAll('.metrics .metric'));
+          const hit = new Array(metrics.length).fill(false);
+          const slop = 28; // pixels of drawn length before triggering
+
+          if (prefersReduced || typeof anime === 'undefined') {
+            activePath.style.strokeDashoffset = '0';
+            // Mark all hits instantly but briefly pulse
+            metrics.forEach((m, i) => {
+              m.classList.add('is-hit');
+              setTimeout(() => m.classList.remove('is-hit'), 250);
+            });
+            return;
+          }
+
+          // Scroll-driven progress anchored to ticker visibility and section center
+          let last = 0;
+          function updateByScroll(){
+            const y = window.scrollY || window.pageYOffset || 0;
+            const vh = window.innerHeight || document.documentElement.clientHeight;
+
+            const ticker = document.querySelector('.ticker');
+            const tickerTop = ticker ? (ticker.getBoundingClientRect().top + y) : (section.getBoundingClientRect().top + y);
+
+            // Start when ticker first becomes visible: top of ticker within viewport
+            const startY = tickerTop - vh; // when bottom of viewport reaches ticker top
+
+            // End when about-metrics center aligns with viewport center
+            const secRect = section.getBoundingClientRect();
+            const secTop = secRect.top + y;
+            const secCenterY = secTop + secRect.height / 2;
+            const endY = secCenterY - vh / 2;
+
+            const denom = Math.max(1, endY - startY);
+            const raw = (y - startY) / denom;
+            const clamped = Math.min(1, Math.max(0, raw));
+
+            // Light temporal smoothing so it feels polished
+            const smoothed = last + (clamped - last) * 0.18;
+            last = smoothed;
+
+            const drawn = totalLen * smoothed;
+            activePath.style.strokeDashoffset = String(totalLen - drawn);
+
+            milestones.forEach((ms, i) => {
+              if (!hit[i] && drawn >= (ms - slop)) {
+                hit[i] = true; const m = metrics[i]; if (!m) return;
+                m.classList.add('is-hit'); setTimeout(() => m.classList.remove('is-hit'), 250);
+              }
+            });
+          }
+          updateByScroll();
+          window.addEventListener('scroll', updateByScroll, { passive: true });
+          window.addEventListener('resize', updateByScroll);
+        }
+
+        // Observe section entry
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => { if (entry.isIntersecting) { prepAndAnimate(); observer.disconnect(); } });
+        }, { threshold: 0.2 });
+        observer.observe(section);
+
+        // Rebuild on resize/orientation (debounced)
+        let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { /* no re-run after once */ }, 200); });
+      })();
+    </script>
+    <!-- Anime.js for original simple draw (appended) -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+    <script>
+      (function(){
+        const section = document.querySelector('.about-metrics.circuit-original') || document.querySelector('.about-metrics');
+        if (!section) return;
+        const desktop = section.querySelector('#metrics-circuit-desktop');
+        const mobile = section.querySelector('#metrics-circuit-mobile');
+        const path = window.matchMedia('(max-width: 900px)').matches ? mobile : desktop;
+        if (!path) return;
+
+        const len = path.getTotalLength();
+        path.style.strokeDasharray = len;
+        path.style.strokeDashoffset = len;
+
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            if (prefersReduced || typeof anime === 'undefined') {
+              path.style.strokeDashoffset = 0;
+            } else {
+              anime({ targets: path, strokeDashoffset: [len, 0], duration: 1600, easing: 'easeInOutSine' });
+            }
+            io.disconnect();
+          });
+        }, { threshold: 0.3 });
+        io.observe(section);
+      })();
+    </script>
+    <!-- Shared animation hooks (perceptual smoothing, ticker fold) -->
+    <script src="assets/animations.js"></script>
+  </body>
+</html>

@@ -9,11 +9,19 @@
 .intro h1 { max-width: 30ch; }
 
 /* Hero image styling - repeating pattern to fill space while maintaining quality */
-.hero-image {
+body[data-page="bento"] .hero-image {
   background-image: url("../images/tile.jpg");
   background-repeat: repeat;
   background-size: auto;
 }
+
+/* Performance hint for hero transforms (bento only) */
+body[data-page="bento"] .intro-block, body[data-page="bento"] .hero-image { will-change: transform; }
+
+/* Gentle Ken Burns pan for hero background (bento only; respects reduced motion) */
+body[data-page="bento"] .hero-image.kenburns { animation: hero-kenburns 12s ease-in-out infinite alternate; transform-origin: 50% 50%; }
+@keyframes hero-kenburns { from { transform: translateZ(0) scale(1); } to { transform: translateZ(0) scale(1.02); } }
+@media (prefers-reduced-motion: reduce) { body[data-page="bento"] .hero-image.kenburns { animation: none !important; } }
 
 /* Apple-esque gradient text effect for "Unique" */
 .accent-word {
@@ -68,6 +76,13 @@
   position: relative;
 }
 
+/* Subtle heading hover accent (bento only) */
+body[data-page="bento"] .intro h1 { position: relative; }
+body[data-page="bento"] .intro h1:hover .brand-phrase,
+body[data-page="bento"] .intro h1:hover .nowrap { color: var(--accent); transition: color 200ms ease; }
+body[data-page="bento"] .intro h1::after { content: ""; position: absolute; left: 0; bottom: -8px; height: 2px; width: 96px; background: var(--accent); transform: scaleX(0); transform-origin: center; transition: transform 200ms ease; }
+body[data-page="bento"] .intro h1:hover::after { transform: scaleX(1); }
+
 /* Thin, monospaced marquee banner */
 .ticker { grid-column: 1 / -1; width: 100vw; margin-inline: calc(50% - 50vw); overflow: hidden; background: var(--color-page); border-block: 1px solid var(--color-border); font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 .ticker__viewport { position: relative; white-space: nowrap; }
@@ -86,9 +101,11 @@
   padding-block: var(--section-pad-y);
   padding-inline: var(--about-pad);
   margin-bottom: -100px; /* tighten gap to next section by 100px */
+  isolation: isolate; /* ensure SVG overlay sits in clear stacking context */
+  overflow: visible;  /* allow circuit line to render outside flow if needed */
 }
 /* Right column larger per inspo (~42/58) */
-.about-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: start; transform: translateY(-150px); }
+.about-grid { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(2rem, 5vw, 3.5rem); align-items: start; transform: translateY(-150px); overflow: visible; }
 @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } }
 
 /* Left visual: neutral wireframe placeholder (no inspo asset linking) */

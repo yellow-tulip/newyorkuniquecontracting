@@ -27,24 +27,36 @@
       document.fonts.ready.then(() => {
         // Always initialize hero animations (handles reduced motion internally)
         initHeroAnimations();
+        // Ensure ticker visibility only on bento draft
+        if (isBentoPage()) {
+          placeTickerAtViewportBottom();
+        }
         
         // Skip other animations for reduced motion users
         if (prefersReducedMotion) return;
         
         initScrollRevealAnimations();
-        initParallaxEffects();
+        if (isBentoPage()) {
+          initParallaxEffects();
+        }
       });
     } else {
       // Fallback for browsers without font loading API
       setTimeout(() => {
         // Always initialize hero animations (handles reduced motion internally)
         initHeroAnimations();
+        // Ensure ticker visibility only on bento draft
+        if (isBentoPage()) {
+          placeTickerAtViewportBottom();
+        }
         
         // Skip other animations for reduced motion users
         if (prefersReducedMotion) return;
         
         initScrollRevealAnimations();
-        initParallaxEffects();
+        if (isBentoPage()) {
+          initParallaxEffects();
+        }
       }, 200);
     }
   }
@@ -166,6 +178,11 @@
         });
       });
     }
+  }
+
+  // Detect bento draft page
+  function isBentoPage() {
+    return document.body?.getAttribute('data-page') === 'bento' || !!document.querySelector('.quad-hero');
   }
 
   /**
@@ -359,71 +376,104 @@
   // Disabled per request - }
 
   /**
-   * Subtle parallax effects
+   * Perceptual smoothing for bento hero — eased element motion relative to native scroll
    */
   function initParallaxEffects() {
-    // Only on desktop to avoid mobile performance issues
-    if (window.innerWidth < 1024) return;
+    const hero = document.querySelector('.quad-hero');
+    const labels = document.querySelectorAll('.quad-hero .slice__label');
+    const media = document.querySelectorAll('.quad-hero .slice__media');
+    if (!hero || (!labels.length && !media.length)) return;
 
-    const heroElement = document.querySelector('.intro-block');
-    const breadcrumbElement = document.querySelector('.about-breadcrumb');
-    
-    if (!heroElement && !breadcrumbElement) return;
+    const config = {
+      stageHeight: () => Math.max(500, Math.min(window.innerHeight, 1200)), // map across ~100vh
+      lerp: 0.18,          // floatier glide
+      labelMaxY: -36,      // stronger, obvious
+      mediaMaxY: -18,      // stronger, obvious
+      mediaMaxZ: -96,      // deeper depth
+      tiltMaxDeg: 0.9,     // subtle tilt
+      heroDriftY: -10,     // scene cohesion
+      heroTiltX: 0.6       // small camera tilt
+    };
 
-    let ticking = false;
-
-    function updateParallax() {
-      const scrollY = window.pageYOffset;
-      const windowHeight = window.innerHeight;
-
-      // Hero micro-parallax (±8px)
-      if (heroElement) {
-        const heroRect = heroElement.getBoundingClientRect();
-        const heroCenter = heroRect.top + heroRect.height / 2;
-        const heroProgress = (windowHeight / 2 - heroCenter) / (windowHeight / 2);
-        const heroOffset = Math.max(-8, Math.min(8, heroProgress * 8));
-        
-        heroElement.style.transform = `translateY(${heroOffset}px)`;
-      }
-
-      // Breadcrumb micro-parallax (±4px horizontal)
-      if (breadcrumbElement) {
-        const breadcrumbRect = breadcrumbElement.getBoundingClientRect();
-        const breadcrumbCenter = breadcrumbRect.top + breadcrumbRect.height / 2;
-        const breadcrumbProgress = (windowHeight / 2 - breadcrumbCenter) / (windowHeight / 2);
-        const breadcrumbOffset = Math.max(-4, Math.min(4, breadcrumbProgress * 4));
-        
-        breadcrumbElement.style.transform = `translateX(${breadcrumbOffset}px)`;
-      }
-
-      ticking = false;
+    let real = 0, virt = 0; let running = false; let scrolling = false; let scrollTimer = null;
+    const tiltMap = new WeakMap(); // slice => {rx, ry, dx}
+    function easeInOutSine(t) { return 0.5 - 0.5 * Math.cos(Math.PI * Math.max(0, Math.min(1, t))); }
+    function readRealProgress() {
+      const y = (window.pageYOffset || document.documentElement.scrollTop || 0) - (hero.offsetTop || 0);
+      const h = config.stageHeight();
+      return Math.max(0, Math.min(1, y / h));
     }
-
-    function requestParallaxUpdate() {
-      if (!ticking) {
-        parallaxRaf = requestAnimationFrame(updateParallax);
-        ticking = true;
-      }
+    function applyTransforms(p) {
+      const e = easeInOutSine(p);
+      // Hero-wide camera drift (small and classy)
+      hero.style.transform = `translateY(${e * config.heroDriftY}px) rotateX(${e * config.heroTiltX}deg)`;
+      // For each slice, apply combined smoothing + optional tilt
+      document.querySelectorAll('.quad-hero .slice').forEach(slice => {
+        const label = slice.querySelector('.slice__label');
+        const med = slice.querySelector('.slice__media');
+        const t = tiltMap.get(slice) || { rx: 0, ry: 0, dx: 0 };
+        if (label) label.style.transform = `translateY(${e * config.labelMaxY}px) translateX(${t.dx * 6}px)`;
+        if (med) med.style.transform = `translateZ(${e * config.mediaMaxZ}px) translateY(${e * config.mediaMaxY}px) rotateX(${t.rx}deg) rotateY(${t.ry}deg)`;
+      });
     }
+    function loop(){ if (!running) return; real = readRealProgress(); virt += (real - virt) * config.lerp; applyTransforms(virt); parallaxRaf = requestAnimationFrame(loop); }
+    function start(){ if (running) return; running = true; loop(); }
+    start();
+    window.addEventListener('scroll', () => { 
+      if (!running) start();
+      // Mark scrolling to suppress hover visuals/tilt
+      if (!scrolling) { scrolling = true; document.body.classList.add('is-scrolling'); }
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => { scrolling = false; document.body.classList.remove('is-scrolling'); }, 180);
+    }, { passive: true });
+    window.addEventListener('resize', () => { /* dynamic getter */ }, { passive: true });
 
-    // Throttled scroll listener
-    window.addEventListener('scroll', requestParallaxUpdate, { passive: true });
-    
-    // Initial call
-    updateParallax();
-
-    // Cleanup on resize if switching to mobile
-    window.addEventListener('resize', () => {
-      if (window.innerWidth < 1024) {
-        window.removeEventListener('scroll', requestParallaxUpdate);
-        if (parallaxRaf) {
-          cancelAnimationFrame(parallaxRaf);
+    // Hover tilt/magnet (pointer: fine only)
+    const fine = window.matchMedia('(pointer: fine)').matches;
+    if (fine) {
+      document.querySelectorAll('.quad-hero .slice').forEach(slice => {
+        const label = slice.querySelector('.slice__label');
+        const med = slice.querySelector('.slice__media');
+        if (!label && !med) return;
+        function onMove(ev){
+          if (scrolling) return; // disable hover effects during scroll
+          const r = slice.getBoundingClientRect();
+          const cx = r.left + r.width/2; const cy = r.top + r.height/2;
+          const dx = (ev.clientX - cx) / (r.width/2); // -1..1
+          const dy = (ev.clientY - cy) / (r.height/2);
+          const rx = Math.max(-config.tiltMaxDeg, Math.min(config.tiltMaxDeg, -dy * config.tiltMaxDeg));
+          const ry = Math.max(-config.tiltMaxDeg, Math.min(config.tiltMaxDeg, dx * config.tiltMaxDeg));
+          tiltMap.set(slice, { rx, ry, dx });
         }
-        // Reset transforms
-        if (heroElement) heroElement.style.transform = '';
-        if (breadcrumbElement) breadcrumbElement.style.transform = '';
-      }
-    });
+        function onLeave(){
+          tiltMap.delete(slice);
+        }
+        slice.addEventListener('mousemove', onMove);
+        slice.addEventListener('mouseleave', onLeave);
+      });
+    }
+  }
+
+  /**
+   * Compute hero image height so the ticker aligns with bottom viewport edge on load
+   * Non-sticky; we only size the hero image to fit the first fold.
+   */
+  function placeTickerAtViewportBottom() {
+    const quadHero = document.querySelector('.quad-hero');
+    const ticker = document.querySelector('.ticker');
+    if (!quadHero || !ticker) return;
+
+    function measure(el) { return el ? el.getBoundingClientRect().height : 0; }
+    function updateHeight() {
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const hTicker = measure(ticker);
+      let target = Math.round(vh - hTicker);
+      const minH = 360; const maxH = Math.max(420, Math.min(900, vh));
+      target = Math.max(minH, Math.min(maxH, target));
+      quadHero.style.height = target + 'px';
+    }
+    updateHeight();
+    let t=null; window.addEventListener('resize', ()=>{ clearTimeout(t); t=setTimeout(updateHeight, 120); });
   }
 
   /**
